@@ -1,5 +1,5 @@
 <script>
-	import Navbar from './../lib/components/navbar.svelte';
+	import MainContainer from './../lib/components/mainContainer.svelte';
 </script>
 
-<Navbar />
+<MainContainer />

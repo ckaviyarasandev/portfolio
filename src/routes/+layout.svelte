@@ -34,10 +34,3 @@
 </svelte:head>
 
 {@render children()}
-
-<div class="mx-auto max-w-7xl px-6 py-12 text-center sm:py-24 lg:px-8">
-	Hello, I am a software developer with a passion for creating innovative and efficient solutions. I
-	specialize in web development, particularly using modern frameworks and technologies. My goal is
-	to build applications that not only meet user needs but also provide an exceptional user
-	experience.
-</div>
