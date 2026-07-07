@@ -1,5 +1,6 @@
 <script>
-	import MainContainer from './../lib/components/mainContainer.svelte';
+	import PageController from '$lib/components/pageController.svelte';
+	import { navbarLinks } from '../datas/content';
 </script>
 
-<MainContainer />
+<PageController page={navbarLinks.home.page} />
