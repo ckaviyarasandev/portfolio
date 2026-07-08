@@ -1,44 +1,173 @@
 <script>
-	import { fade } from 'svelte/transition';
-	import { cubicOut } from 'svelte/easing';
+	import { onMount } from 'svelte';
+	import SlideShow from './GUI/slideShow.svelte';
+	import { heroPageColors } from '../../themes/styles.js';
+	import { generateGradient, getNextPalette } from '../../utils/gradientGenerator';
+	import { slideDirections } from '../../utils/const.js';
 
-	let { section, slideIndex, totalSlides } = $props();
+	const INTERVAL = 2000;
+	const TRANSITION_MS = 500;
 
-	const TRANSITION_DURATION = 600;
+	/**
+	 * Hero owns the whole slide concept now: index, autoplay, palette
+	 * cycling, keyboard nav, and pause-on-hover all live here. The page
+	 * shell (pageController) only supplies the section data and listens
+	 * for background changes via onBackgroundChange — it no longer knows
+	 * or cares that slides even have an index.
+	 */
+	let { sections = [], onBackgroundChange } = $props();
+
+	// ===== Slide / palette state =====
+	let currentIndex = $state(0);
+	let currentPalette = $state(heroPageColors[0]);
+	let currentGradient = $state(generateGradient(heroPageColors[0]));
+	let isAnimating = $state(false);
+	let slideDirection = $state(slideDirections.next);
+
+	// ===== Autoplay state =====
+	let timer;
+	let isPaused = $state(false);
+	let prefersReducedMotion = $state(false);
+
+	// ===== Scrollable track =====
+	let trackEl = $state();
+
+	// Report the current gradient upward whenever it changes.
+	$effect(() => {
+		onBackgroundChange?.(currentGradient);
+	});
+
+	// Keep the scroll position in sync whenever currentIndex changes
+	// (autoplay, arrow keys, or a manual scroll settling on a slide).
+	$effect(() => {
+		if (!trackEl) return;
+		trackEl.scrollTo({ left: trackEl.clientWidth * currentIndex, behavior: 'smooth' });
+	});
+
+	function unlockAfterTransition() {
+		setTimeout(() => {
+			isAnimating = false;
+		}, TRANSITION_MS);
+	}
+
+	function changeSlide(index) {
+		if (isAnimating) return; // ignore input mid-animation
+		isAnimating = true;
+		currentIndex = index;
+		currentPalette = getNextPalette(heroPageColors, currentPalette.colorName);
+		currentGradient = generateGradient(currentPalette);
+		resetTimer();
+		unlockAfterTransition();
+	}
+
+	function goToSlide(index) {
+		changeSlide(index);
+	}
+
+	function nextSlide() {
+		changeSlide((currentIndex + 1) % sections.length);
+	}
+
+	function prevSlide() {
+		changeSlide((currentIndex - 1 + sections.length) % sections.length);
+	}
+
+	// ===== Autoplay =====
+	function startTimer() {
+		if (isPaused || prefersReducedMotion) return;
+		timer = setInterval(nextSlide, INTERVAL);
+	}
+	function stopTimer() {
+		if (timer) clearInterval(timer);
+	}
+	function resetTimer() {
+		stopTimer();
+		startTimer();
+	}
+
+	function handlePause() {
+		isPaused = true;
+		stopTimer();
+	}
+	function handleResume() {
+		isPaused = false;
+		startTimer();
+	}
+
+	function handleKeydown(e) {
+		if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+		if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+	}
+
+	// ===== Manual scroll → index sync =====
+	let scrollTimeout;
+	function handleScroll() {
+		if (!trackEl) return;
+		clearTimeout(scrollTimeout);
+		// Debounced so we report the settled slide, not every frame mid-drag.
+		scrollTimeout = setTimeout(() => {
+			goToSlide(Math.round(trackEl.scrollLeft / trackEl.clientWidth));
+		}, 120);
+	}
+
+	onMount(() => {
+		const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+		prefersReducedMotion = mq.matches;
+		const onChange = (e) => (prefersReducedMotion = e.matches);
+		mq.addEventListener('change', onChange);
+
+		startTimer();
+
+		return () => {
+			stopTimer();
+			mq.removeEventListener('change', onChange);
+		};
+	});
 </script>
 
+<svelte:window onkeydown={handleKeydown} />
+
 <div
-	class="relative z-10 flex min-h-[280px] w-full max-w-4xl flex-col items-center justify-center text-center"
+	bind:this={trackEl}
+	onscroll={handleScroll}
+	onmouseenter={handlePause}
+	onmouseleave={handleResume}
+	class="glass-scroll relative z-10 flex w-full max-w-6xl snap-x snap-mandatory overflow-x-auto scroll-smooth"
 >
-	{#key slideIndex}
-		<div
-			in:fade={{ duration: TRANSITION_DURATION, delay: 150, easing: cubicOut }}
-			out:fade={{ duration: TRANSITION_DURATION / 2, easing: cubicOut }}
-			class="flex flex-col items-center"
-		>
-			<span
-				class="mb-4 inline-block rounded-full border border-white/20 bg-white/5 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-white/70 backdrop-blur-sm"
-			>
-				{section.eyebrow ?? `0${slideIndex + 1} / 0${totalSlides}`}
-			</span>
-
-			<h1 class="mb-4 text-5xl font-bold leading-tight text-white md:text-6xl">
-				{section.title}
-			</h1>
-
-			<p class="max-w-2xl text-lg text-white/80 md:text-xl">
-				{section.description}
-			</p>
-
-			{#if section.ctaLabel}
-				<a
-					href={section.ctaHref ?? '#'}
-					class="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-zinc-900 transition-transform duration-300 hover:scale-105 hover:shadow-lg"
-				>
-					{section.ctaLabel}
-					<span aria-hidden="true">→</span>
-				</a>
-			{/if}
+	{#each sections as section (section.id)}
+		<div class="w-full shrink-0 snap-start overflow-hidden">
+			<SlideShow {section} />
 		</div>
-	{/key}
+	{/each}
 </div>
+
+<style>
+	/* Glassy scrollbar: frosted, translucent, matches the rest of the hero's
+	   glass-panel look instead of the browser default. */
+	.glass-scroll {
+		scrollbar-width: thin;
+		scrollbar-color: rgba(255, 255, 255, 0.45) rgba(255, 255, 255, 0.08);
+	}
+
+	.glass-scroll::-webkit-scrollbar {
+		height: 10px;
+	}
+
+	.glass-scroll::-webkit-scrollbar-track {
+		background: rgba(255, 255, 255, 0.08);
+		border-radius: 999px;
+		margin-inline: 4px;
+	}
+
+	.glass-scroll::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.4);
+		border-radius: 999px;
+		border: 2px solid rgba(255, 255, 255, 0.08);
+		background-clip: padding-box;
+	}
+
+	.glass-scroll::-webkit-scrollbar-thumb:hover {
+		background: rgba(255, 255, 255, 0.6);
+		background-clip: padding-box;
+	}
+</style>

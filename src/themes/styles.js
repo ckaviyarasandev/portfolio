@@ -1,3 +1,10 @@
+export const notFoundPalette = {
+	colorName: 'Error Red',
+	light: '#FCA5A5',
+	mid: '#DC2626',
+	dark: '#7F1D1D'
+};
+
 export const heroPageColors = [
 	{
 		colorName: 'Ocean Blue',
