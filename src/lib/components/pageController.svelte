@@ -6,24 +6,28 @@
 	import { navbarLinks, heroPageSections } from '../../datas/content';
 	import { heroPageColors, notFoundPalette } from '../../themes/styles.js';
 	import { generateGradient } from '../../utils/gradientGenerator';
+	import ExperiencePage from './experience/experiencePage.svelte';
 
 	const notFoundGradient = generateGradient(notFoundPalette);
 
 	let { page } = $props();
 
-	// Seeded with the same starting palette Hero itself starts on, so there's
-	// no flash of white before Hero's first onBackgroundChange fires.
 	let currentGradient = $state(generateGradient(heroPageColors[0]));
 
 	let isKnownPage = $derived(Object.values(navbarLinks).some((link) => link.page === page));
 	let isNotFound = $derived(!isKnownPage);
 	let isHome = $derived(!isNotFound && page === navbarLinks.home.page);
+	let experiencePage = $derived(page === navbarLinks.experience.page);
 
 	let activeBackground = $derived(isHome ? currentGradient : isNotFound ? notFoundGradient : null);
 
 	function navigateTo(targetPage) {
 		const path = targetPage === navbarLinks.home.page ? '/' : `/${targetPage}`;
-		goto(path); // real SvelteKit navigation now — each page is a real route
+		goto(path);
+	}
+
+	function handleNavigate(page) {
+		selectedPage = page;
 	}
 </script>
 
@@ -53,13 +57,17 @@
 			sections={heroPageSections}
 			onBackgroundChange={(gradient) => (currentGradient = gradient)}
 		/>
+	{:else if experiencePage}
+		<ExperiencePage
+			onBackgroundChange={(gradient) => (currentGradient = gradient)}
+			onNavigate={handleNavigate}
+		/>
 	{:else if isNotFound}
 		<NotFound />
 	{/if}
 </section>
 
 <style>
-	/* ===== 3D perspective grid ===== */
 	.grid-3d {
 		height: 220%; /* overshoot so the rotated projection still reaches the top */
 		background-image:
