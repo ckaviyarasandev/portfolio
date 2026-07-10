@@ -116,7 +116,6 @@
 </script>
 
 <svelte:window onkeydown={handleKeydown} />
-
 <div
 	class="relative z-10 mx-auto mt-14 w-full"
 	onmouseenter={handlePause}
@@ -125,9 +124,10 @@
 	ontouchend={handleTouchEnd}
 >
 	<div
-		class="relative h-[calc(100dvh-6rem)] min-h-[480px] w-full overflow-hidden
+		class="relative w-full overflow-hidden
+			h-[calc(100dvh-6rem)]
 			sm:h-[calc(100dvh-7rem)]
-			lg:h-[calc(100dvh-8rem)] lg:min-h-[560px]"
+			lg:h-[calc(100dvh-8rem)]"
 	>
 		{#each sections as section, i (section.id)}
 			<div
@@ -140,12 +140,6 @@
 				"
 				aria-hidden={i !== currentIndex}
 			>
-				<!--
-					min-h-full + flex centers short content vertically;
-					if content is taller than the stage, this wrapper
-					simply grows and the parent's overflow-y-auto
-					takes over — content scrolls in place, nothing clips.
-				-->
 				<div class="mx-auto flex min-h-full w-full items-center justify-center">
 					<SlideShow {section} />
 				</div>

@@ -39,10 +39,13 @@
 		<div
 			class="pointer-events-none absolute inset-0 bg-linear-to-br from-white/6 via-transparent to-black/20"
 		></div>
-		<div
-			class="pointer-events-none absolute inset-0 opacity-[0.03]"
-			style="background-image: linear-gradient(white 1px, transparent 1px), linear-gradient(90deg, white 1px, transparent 1px); background-size: 48px 48px;"
-		></div>
+		<div class="pointer-events-none absolute inset-0 overflow-hidden [perspective:600px]">
+			<div class="grid-3d absolute inset-x-0 bottom-0 opacity-[0.12]"></div>
+			<div
+				class="pointer-events-none absolute inset-0"
+				style="background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, transparent 55%);"
+			></div>
+		</div>
 	{/if}
 
 	{#if isHome}
@@ -54,3 +57,33 @@
 		<NotFound />
 	{/if}
 </section>
+
+<style>
+	/* ===== 3D perspective grid ===== */
+	.grid-3d {
+		height: 220%; /* overshoot so the rotated projection still reaches the top */
+		background-image:
+			linear-gradient(white 1px, transparent 1px),
+			linear-gradient(90deg, white 1px, transparent 1px);
+		background-size: 48px 48px;
+		transform-origin: 50% 100%;
+		transform: rotateX(60deg) scale(1.6);
+		animation: grid-drift 14s linear infinite;
+		will-change: background-position;
+	}
+
+	@keyframes grid-drift {
+		from {
+			background-position: 0 0;
+		}
+		to {
+			background-position: 0 96px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.grid-3d {
+			animation: none;
+		}
+	}
+</style>
