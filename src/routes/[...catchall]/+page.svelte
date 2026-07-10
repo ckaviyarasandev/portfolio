@@ -3,4 +3,4 @@
 	import { navbarLinks } from '../../datas/content';
 </script>
 
-<PageController page={navbarLinks.notFound.page} />
+<PageController page="notFound" />

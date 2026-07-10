@@ -538,6 +538,5 @@ export const navbarLinks = {
 	home: { name: 'Home', page: 'home' },
 	experience: { name: 'Experience', page: 'experience' },
 	skills: { name: 'Skills', page: 'skills' },
-	contact: { name: 'Contact', page: 'contact' },
-	notFound: { name: 'Not Found', page: '404' }
+	contact: { name: 'Contact', page: 'contact' }
 };

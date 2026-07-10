@@ -8,122 +8,122 @@ export const notFoundPalette = {
 export const heroPageColors = [
 	{
 		colorName: 'Ocean Blue',
-		primary: '#2563EB',
-		secondary: '#1E3A8A',
-		accent: '#60A5FA'
+		primary: '#1D4ED8',
+		secondary: '#172554',
+		accent: '#3B82F6'
 	},
 	{
 		colorName: 'Royal Purple',
-		primary: '#7C3AED',
-		secondary: '#4C1D95',
-		accent: '#A78BFA'
+		primary: '#6D28D9',
+		secondary: '#2E1065',
+		accent: '#8B5CF6'
 	},
 	{
 		colorName: 'Emerald',
-		primary: '#10B981',
-		secondary: '#065F46',
-		accent: '#6EE7B7'
+		primary: '#047857',
+		secondary: '#022C22',
+		accent: '#10B981'
 	},
 	{
 		colorName: 'Sunset Orange',
-		primary: '#F97316',
-		secondary: '#9A3412',
-		accent: '#FDBA74'
+		primary: '#C2410C',
+		secondary: '#431407',
+		accent: '#EA580C'
 	},
 	{
 		colorName: 'Rose',
-		primary: '#F43F5E',
-		secondary: '#881337',
-		accent: '#FDA4AF'
+		primary: '#BE123C',
+		secondary: '#4C0519',
+		accent: '#E11D48'
 	},
 	{
 		colorName: 'Golden Amber',
-		primary: '#F59E0B',
-		secondary: '#92400E',
-		accent: '#FCD34D'
+		primary: '#B45309',
+		secondary: '#451A03',
+		accent: '#D97706'
 	},
 	{
 		colorName: 'Teal',
-		primary: '#14B8A6',
-		secondary: '#134E4A',
-		accent: '#5EEAD4'
+		primary: '#0F766E',
+		secondary: '#042F2E',
+		accent: '#14B8A6'
 	},
 	{
 		colorName: 'Sky',
-		primary: '#0EA5E9',
-		secondary: '#075985',
-		accent: '#7DD3FC'
+		primary: '#0369A1',
+		secondary: '#082F49',
+		accent: '#0284C7'
 	},
 	{
 		colorName: 'Lavender',
-		primary: '#8B5CF6',
-		secondary: '#5B21B6',
-		accent: '#C4B5FD'
+		primary: '#6D28D9',
+		secondary: '#3B0764',
+		accent: '#8B5CF6'
 	},
 	{
 		colorName: 'Crimson',
-		primary: '#DC2626',
-		secondary: '#7F1D1D',
-		accent: '#FCA5A5'
+		primary: '#B91C1C',
+		secondary: '#450A0A',
+		accent: '#DC2626'
 	},
 	{
 		colorName: 'Forest',
-		primary: '#22C55E',
-		secondary: '#14532D',
-		accent: '#86EFAC'
+		primary: '#166534',
+		secondary: '#052E16',
+		accent: '#22C55E'
 	},
 	{
 		colorName: 'Coral',
-		primary: '#FB7185',
-		secondary: '#9F1239',
-		accent: '#FDBA74'
+		primary: '#BE123C',
+		secondary: '#500724',
+		accent: '#E11D48'
 	},
 	{
 		colorName: 'Indigo',
-		primary: '#4F46E5',
-		secondary: '#312E81',
-		accent: '#818CF8'
+		primary: '#4338CA',
+		secondary: '#1E1B4B',
+		accent: '#6366F1'
 	},
 	{
 		colorName: 'Slate',
-		primary: '#64748B',
-		secondary: '#1E293B',
-		accent: '#CBD5E1'
+		primary: '#334155',
+		secondary: '#0F172A',
+		accent: '#64748B'
 	},
 	{
 		colorName: 'Mint',
-		primary: '#34D399',
-		secondary: '#065F46',
-		accent: '#A7F3D0'
+		primary: '#047857',
+		secondary: '#022C22',
+		accent: '#34D399'
 	},
 	{
 		colorName: 'Copper',
-		primary: '#D97706',
-		secondary: '#78350F',
-		accent: '#FBBF24'
+		primary: '#92400E',
+		secondary: '#3B1706',
+		accent: '#B45309'
 	},
 	{
 		colorName: 'Magenta',
-		primary: '#D946EF',
-		secondary: '#701A75',
-		accent: '#F5A3FF'
+		primary: '#A21CAF',
+		secondary: '#3B0764',
+		accent: '#C026D3'
 	},
 	{
 		colorName: 'Arctic',
-		primary: '#3B82F6',
+		primary: '#1D4ED8',
 		secondary: '#172554',
-		accent: '#BFDBFE'
+		accent: '#3B82F6'
 	},
 	{
 		colorName: 'Lime',
-		primary: '#84CC16',
-		secondary: '#365314',
-		accent: '#D9F99D'
+		primary: '#4D7C0F',
+		secondary: '#1A2E05',
+		accent: '#65A30D'
 	},
 	{
 		colorName: 'Midnight',
-		primary: '#1E293B',
+		primary: '#0F172A',
 		secondary: '#020617',
-		accent: '#475569'
+		accent: '#334155'
 	}
 ];

@@ -6,25 +6,26 @@
 	const Layout = $derived(LAYOUTS[section.layout] ?? LAYOUTS[DEFAULT_LAYOUT]);
 </script>
 
-<div class="slide-root">
+<div
+	class="slide-root w-full box-border shrink-0 overflow-x-hidden overflow-y-auto [-webkit-overflow-scrolling:touch]"
+>
 	<Layout {section} />
 </div>
 
 <style>
-	/* Locks this slide to exactly the width/height its parent gives it and
-	   clips anything inside that would otherwise overflow — so this slide
-	   can never grow wider than its slot or let its own content bleed past
-	   its edges into a neighboring slide. */
-	.slide-root {
-		width: 100%;
-		height: 100%;
-		flex-shrink: 0;
-		overflow: hidden;
-		box-sizing: border-box;
+	.slide-root::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	.slide-root::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.25);
+		border-radius: 3px;
 	}
 
 	/* Shared text-shadow utilities used across every block. Defined once,
-	   globally, here — the single component every slide always mounts. */
+	   globally, here — the single component every slide always mounts.
+	   Tailwind's core utilities have no text-shadow support, so these
+	   stay as plain CSS. */
 	:global(.text-shadow-sm) {
 		text-shadow: 0 1px 3px rgba(243, 243, 243, 0.55);
 	}
