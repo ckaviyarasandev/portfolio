@@ -15,7 +15,7 @@
 </script>
 
 {#if image?.src}
-	<div class={cx('flex flex-1 justify-center', className)}>
+	<div class={cx('flex flex-1 justify-center max-w-max', className)}>
 		{#if isBackground}
 			<div class="relative">
 				<div

@@ -5,7 +5,7 @@
 
 {#if description}
 	<p
-		class="text-shadow-sm mt-6 max-w-2xl text-pretty rounded-2xl bg-gray-800/10 px-4 py-2 text-lg leading-8 text-white backdrop-blur-xl {alignClass}"
+		class="text-shadow-sm mt-6 max-w-2xl text-pretty rounded-2xl bg-gray-800/10 px-4 py-2 text-base leading-8 text-white backdrop-blur-xl {alignClass}"
 	>
 		{description}
 	</p>

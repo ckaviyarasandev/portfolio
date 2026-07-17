@@ -4,17 +4,9 @@
 	import { heroPageColors } from '../../themes/styles.js';
 	import { generateGradient, getNextPalette } from '../../utils/gradientGenerator';
 
-	const INTERVAL = 4000;
-	const TRANSITION_MS = 700;
+	const INTERVAL = 15000;
+	const TRANSITION_MS = 300;
 
-	/**
-	 * Hero owns index, autoplay, palette cycling, keyboard/swipe nav,
-	 * and pause-on-hover. Slides are layered (absolute + opacity/scale
-	 * crossfade); each slide scrolls internally if its content exceeds
-	 * the stage height, so tall content never clips or bleeds into
-	 * neighboring slides. pageController only supplies section data
-	 * and listens for background changes.
-	 */
 	let { sections = [], onBackgroundChange } = $props();
 
 	let currentIndex = $state(0);
@@ -117,7 +109,8 @@
 
 <svelte:window onkeydown={handleKeydown} />
 <div
-	class="relative z-10 mx-auto mt-14 w-full"
+	class="relative z-10 mx-auto mt-2 w-full"
+	role="region"
 	onmouseenter={handlePause}
 	onmouseleave={handleResume}
 	ontouchstart={handleTouchStart}
@@ -125,13 +118,13 @@
 >
 	<div
 		class="relative w-full overflow-hidden
-			h-[calc(100dvh-6rem)]
-			sm:h-[calc(100dvh-7rem)]
-			lg:h-[calc(100dvh-8rem)]"
+			h-[calc(100dvh-4rem)]
+			sm:h-[calc(100dvh-4rem)]
+			lg:h-[calc(100dvh-4rem)]"
 	>
 		{#each sections as section, i (section.id)}
 			<div
-				class="glass-scroll absolute inset-0 overflow-y-auto overscroll-contain px-4 py-8 sm:px-8 sm:py-10 lg:px-14"
+				class="glass-scroll absolute inset-0 overflow-y-auto overscroll-contain p-4"
 				style="
 					opacity: {i === currentIndex ? 1 : 0};
 					transform: scale({i === currentIndex ? 1 : 0.96}) translateY({i === currentIndex ? 0 : 12}px);
@@ -148,47 +141,6 @@
 	</div>
 
 	{#if sections.length > 1}
-		<button
-			type="button"
-			onclick={prevSlide}
-			aria-label="Previous slide"
-			class="absolute left-1 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60
-				sm:left-2 sm:h-9 sm:w-9"
-		>
-			<svg
-				width="16"
-				height="16"
-				viewBox="0 0 16 16"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="1.8"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			>
-				<path d="M10 3L5 8l5 5" />
-			</svg>
-		</button>
-		<button
-			type="button"
-			onclick={nextSlide}
-			aria-label="Next slide"
-			class="absolute right-1 top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md transition-colors hover:bg-white/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60
-				sm:right-2 sm:h-9 sm:w-9"
-		>
-			<svg
-				width="16"
-				height="16"
-				viewBox="0 0 16 16"
-				fill="none"
-				stroke="currentColor"
-				stroke-width="1.8"
-				stroke-linecap="round"
-				stroke-linejoin="round"
-			>
-				<path d="M6 3l5 5-5 5" />
-			</svg>
-		</button>
-
 		<div class="absolute bottom-2 left-1/2 z-20 flex -translate-x-1/2 gap-2 sm:bottom-4">
 			{#each sections as section, i (section.id)}
 				<button

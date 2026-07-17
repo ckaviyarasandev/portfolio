@@ -12,9 +12,9 @@
 </script>
 
 <section
-	class="relative flex w-full flex-col items-center gap-12 overflow-hidden px-6 py-8 text-center md:flex-row md:justify-between md:text-left"
+	class="relative flex w-full flex-col items-center justify-center gap-8 overflow-hidden text-center md:flex-row md:justify-between md:text-left"
 >
-	<div class={cx('flex flex-1 flex-col items-center md:items-start', imageOnLeft && 'md:order-2')}>
+	<div class={cx('w-full flex flex-1 flex-col items-center md:items-start', imageOnLeft && 'md:order-2')}>
 		<SlideHeading tag={section.tag} title={section.title} subtitle={section.subtitle} quote={section.quote} />
 		<SlideDescription description={section.description} />
 		<ActionGroup buttons={section.buttons} links={section.links} />

@@ -22,10 +22,6 @@
 		border-radius: 3px;
 	}
 
-	/* Shared text-shadow utilities used across every block. Defined once,
-	   globally, here — the single component every slide always mounts.
-	   Tailwind's core utilities have no text-shadow support, so these
-	   stay as plain CSS. */
 	:global(.text-shadow-sm) {
 		text-shadow: 0 1px 3px rgba(243, 243, 243, 0.55);
 	}

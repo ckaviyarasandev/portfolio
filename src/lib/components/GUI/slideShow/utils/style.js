@@ -11,11 +11,11 @@ export const IMAGE_SHAPES = {
 };
 
 export const IMAGE_FRAMES = {
-	plain: 'p-0 border-0 bg-transparent',
-	bordered: 'p-2 border border-white/25 bg-white/10 backdrop-blur-xl shadow-xl shadow-black/30',
+	plain: 'border-0 bg-transparent',
+	bordered: 'border border-white/25 bg-white/10 backdrop-blur-xl shadow-xl shadow-black/30',
 	elevated:
-		'p-1.5 border border-white/15 bg-white/[0.07] backdrop-blur-xl shadow-2xl shadow-black/40',
-	background: 'p-0 border-0 bg-transparent'
+		'border border-white/15 bg-white/[0.07] backdrop-blur-xl shadow-2xl shadow-black/40',
+	background: 'border-0 bg-transparent'
 };
 
 export const IMAGE_SIZES = {

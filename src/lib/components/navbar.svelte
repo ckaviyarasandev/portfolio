@@ -34,14 +34,14 @@
 	}
 </script>
 
-<header class="fixed inset-x-0 top-2 z-50 px-4 pt-3">
+<header class="fixed top-0 right-0 max-w-max z-50 px-4 mr-6">
 	<nav
-		class="mx-auto flex max-w-5xl items-center justify-between rounded-full border px-5 py-1.5 backdrop-blur-md transition-colors duration-500 motion-reduce:transition-none {theme.nav}"
+		class="flex gap-6 max-w-max items-center justify-between rounded-b-4xl border border-t-0 px-10 py-2 border-white/5 shadow backdrop-blur-md transition-colors duration-500 motion-reduce:transition-none {theme.nav}"
 	>
 		<button
 			type="button"
 			onclick={() => go(navbarLinks.home.page)}
-			class="group flex select-none items-baseline gap-2 rounded-full outline-none focus-visible:ring-2 focus-visible:ring-current"
+			class="group flex select-none items-baseline gap-2 rounded-4xl outline-none focus-visible:ring-2 focus-visible:ring-current"
 		>
 			<h1 class="text-lg font-semibold tracking-tight transition-colors duration-300 {theme.brand}">
 				{aboutMe.name}
@@ -51,7 +51,6 @@
 			</span>
 		</button>
 
-		<!-- Desktop links -->
 		<ul class="hidden items-center gap-1 sm:flex">
 			{#each Object.values(navbarLinks) as link}
 				<li>

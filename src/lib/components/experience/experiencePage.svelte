@@ -62,7 +62,9 @@
 	}
 </script>
 
-<div>
+<div
+	class="relative flex w-full flex-col items-center justify-center overflow-hidden px-6 bg-black"
+>
 	<ExperienceHero {experience} />
 	<CareerTimeline {experience} onSelect={scrollToJob} />
 

@@ -7,7 +7,7 @@
 	let { section } = $props();
 </script>
 
-<section class="relative flex w-full flex-col items-center gap-6 overflow-hidden px-6 py-8 text-center">
+<section class="relative flex w-full flex-col items-center gap-8 overflow-hidden text-center">
 	<SlideHeading
 		tag={section.tag}
 		title={section.title}
