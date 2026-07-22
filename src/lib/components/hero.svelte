@@ -4,7 +4,7 @@
 	import { heroPageColors } from '../../themes/styles.js';
 	import { generateGradient, getNextPalette } from '../../utils/gradientGenerator';
 
-	const INTERVAL = 15000;
+	const INTERVAL = 1000;
 	const TRANSITION_MS = 300;
 
 	let { sections = [], onBackgroundChange } = $props();
@@ -13,7 +13,7 @@
 	let currentPalette = $state(heroPageColors[0]);
 	let currentGradient = $state(generateGradient(heroPageColors[0]));
 	let isAnimating = $state(false);
-
+	
 	let timer;
 	let isPaused = $state(false);
 	let prefersReducedMotion = $state(false);
