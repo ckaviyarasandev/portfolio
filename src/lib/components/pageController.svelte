@@ -34,7 +34,7 @@
 <Navbar selectedPage={page} onNavigate={navigateTo} />
 
 <section
-	class="relative flex min-h-screen w-full items-center justify-center overflow-hidden px-6 transition-[background] duration-700 ease-in-out"
+	class="relative flex min-h-screen w-full items-center justify-center overflow-hidden transition-[background] duration-700 ease-in-out"
 	style:background-image={activeBackground ?? 'none'}
 	style:background-color={activeBackground ? 'transparent' : '#ffffff'}
 	aria-label="Page content"

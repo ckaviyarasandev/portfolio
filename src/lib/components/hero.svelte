@@ -4,16 +4,29 @@
 	import { heroPageColors } from '../../themes/styles.js';
 	import { generateGradient, getNextPalette } from '../../utils/gradientGenerator';
 
-	const INTERVAL = 1000;
-	const TRANSITION_MS = 300;
+	const INTERVAL = 5000;
+	// Total duration of the staged slide animation. Bumped up from 300ms so the
+	// three stages (quick start / fast slide / gentle ease-out) each have room
+	// to actually read as distinct, rather than being over before they register.
+	const TRANSITION_MS = 600;
 
 	let { sections = [], onBackgroundChange } = $props();
 
 	let currentIndex = $state(0);
+	// The slide currently animating OUT. Null whenever nothing is transitioning.
+	// This — plus `direction` — is the single source of truth for which two
+	// slides move and which way. No other slide's transform is ever touched.
+	let previousIndex = $state(null);
+	let direction = $state(1); // 1 = forward (next), -1 = backward (prev)
+	// Bumped on every transition so the {#key} block below forces Svelte to
+	// recreate the animating element, which restarts the CSS keyframe cleanly
+	// even when the same direction/index repeats back-to-back.
+	let transitionId = $state(0);
+
 	let currentPalette = $state(heroPageColors[0]);
 	let currentGradient = $state(generateGradient(heroPageColors[0]));
 	let isAnimating = $state(false);
-	
+
 	let timer;
 	let isPaused = $state(false);
 	let prefersReducedMotion = $state(false);
@@ -28,13 +41,17 @@
 	function unlockAfterTransition() {
 		setTimeout(() => {
 			isAnimating = false;
+			previousIndex = null;
 		}, TRANSITION_MS);
 	}
 
-	function changeSlide(index) {
+	function changeSlide(index, dir) {
 		if (isAnimating || index === currentIndex || !sections.length) return;
 		isAnimating = true;
+		previousIndex = currentIndex;
+		direction = dir;
 		currentIndex = index;
+		transitionId += 1;
 		currentPalette = getNextPalette(heroPageColors, currentPalette.colorName);
 		currentGradient = generateGradient(currentPalette);
 		resetTimer();
@@ -42,13 +59,18 @@
 	}
 
 	function goToSlide(index) {
-		changeSlide(index);
+		if (index === currentIndex || !sections.length) return;
+		const len = sections.length;
+		const forwardDist = (index - currentIndex + len) % len;
+		const backwardDist = (currentIndex - index + len) % len;
+		const dir = forwardDist <= backwardDist ? 1 : -1;
+		changeSlide(index, dir);
 	}
 	function nextSlide() {
-		changeSlide((currentIndex + 1) % sections.length);
+		changeSlide((currentIndex + 1) % sections.length, 1);
 	}
 	function prevSlide() {
-		changeSlide((currentIndex - 1 + sections.length) % sections.length);
+		changeSlide((currentIndex - 1 + sections.length) % sections.length, -1);
 	}
 
 	function startTimer() {
@@ -109,7 +131,7 @@
 
 <svelte:window onkeydown={handleKeydown} />
 <div
-	class="relative z-10 mx-auto mt-2 w-full"
+	class="relative z-10 mx-auto w-full"
 	role="region"
 	onmouseenter={handlePause}
 	onmouseleave={handleResume}
@@ -117,26 +139,42 @@
 	ontouchend={handleTouchEnd}
 >
 	<div
-		class="relative w-full overflow-hidden
-			h-[calc(100dvh-4rem)]
-			sm:h-[calc(100dvh-4rem)]
-			lg:h-[calc(100dvh-4rem)]"
+		class="relative w-full overflow-hidden h-[calc(100dvh)] px-4"
+		style="--slide-duration: {TRANSITION_MS}ms;"
 	>
 		{#each sections as section, i (section.id)}
-			<div
-				class="glass-scroll absolute inset-0 overflow-y-auto overscroll-contain p-4"
-				style="
-					opacity: {i === currentIndex ? 1 : 0};
-					transform: scale({i === currentIndex ? 1 : 0.96}) translateY({i === currentIndex ? 0 : 12}px);
-					transition: opacity {TRANSITION_MS}ms ease-out, transform {TRANSITION_MS}ms ease-out;
-					pointer-events: {i === currentIndex ? 'auto' : 'none'};
-				"
-				aria-hidden={i !== currentIndex}
-			>
-				<div class="mx-auto flex min-h-full w-full items-center justify-center">
-					<SlideShow {section} />
+			{#if i === currentIndex || i === previousIndex}
+				{#key `${i}-${transitionId}`}
+					<div
+						class="glass-scroll absolute inset-0 overflow-y-auto overscroll-contain p-6
+							{i === previousIndex
+								? direction === 1 ? 'slide-out-left' : 'slide-out-right'
+								: previousIndex !== null
+									? direction === 1 ? 'slide-in-right' : 'slide-in-left'
+									: 'slide-resting'}"
+						style="
+							pointer-events: {i === currentIndex ? 'auto' : 'none'};
+							z-index: {i === currentIndex ? 2 : 1};
+							visibility: visible;
+						"
+						aria-hidden={i !== currentIndex}
+					>
+						<div class="mx-auto mt-8 flex min-h-full w-full items-center justify-center">
+							<SlideShow {section} />
+						</div>
+					</div>
+				{/key}
+			{:else}
+				<div
+					class="glass-scroll absolute inset-0 overflow-y-auto overscroll-contain p-6 slide-parked"
+					style="pointer-events: none; z-index: 0;"
+					aria-hidden="true"
+				>
+					<div class="mx-auto mt-8 flex min-h-full w-full items-center justify-center">
+						<SlideShow {section} />
+					</div>
 				</div>
-			</div>
+			{/if}
 		{/each}
 	</div>
 
@@ -158,7 +196,6 @@
 </div>
 
 <style>
-	/* ===== Glassy scrollbar ===== */
 	.glass-scroll {
 		scrollbar-width: thin;
 		scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
@@ -194,5 +231,73 @@
 	.glass-scroll::-webkit-scrollbar-thumb:active {
 		background: rgba(255, 255, 255, 0.85);
 		background-clip: padding-box;
+	}
+
+	/* Slides that are not currently entering or exiting sit parked
+	   off-stage, statically, with no transition/animation applied to
+	   them at all — this is what stops any non-adjacent slide from
+	   ever sweeping across the screen. visibility:hidden is a second,
+	   independent safeguard: even if a transform value were ever
+	   wrong for any reason, a parked slide still cannot paint. */
+	.slide-parked {
+		transform: translateX(100%);
+		visibility: hidden;
+	}
+
+	.slide-resting {
+		transform: translateX(0%);
+		visibility: visible;
+	}
+
+	.slide-in-right {
+		animation: slideInFromRight var(--slide-duration, 600ms) linear forwards;
+	}
+	.slide-in-left {
+		animation: slideInFromLeft var(--slide-duration, 600ms) linear forwards;
+	}
+	.slide-out-left {
+		animation: slideOutToLeft var(--slide-duration, 600ms) linear forwards;
+	}
+	.slide-out-right {
+		animation: slideOutToRight var(--slide-duration, 600ms) linear forwards;
+	}
+
+	/* Staged, premium motion:
+	   0%–10%  quick start   — covers a good chunk of the distance fast
+	   10%–80% smooth slide  — the bulk of the travel, steady and brisk
+	   80%–100% ease-out     — the last stretch, slow and gentle to land */
+	@keyframes slideInFromRight {
+		0%   { transform: translateX(100%); }
+		10%  { transform: translateX(75%); }
+		80%  { transform: translateX(10%); }
+		100% { transform: translateX(0%); }
+	}
+	@keyframes slideInFromLeft {
+		0%   { transform: translateX(-100%); }
+		10%  { transform: translateX(-75%); }
+		80%  { transform: translateX(-10%); }
+		100% { transform: translateX(0%); }
+	}
+	@keyframes slideOutToLeft {
+		0%   { transform: translateX(0%); }
+		10%  { transform: translateX(-25%); }
+		80%  { transform: translateX(-90%); }
+		100% { transform: translateX(-100%); }
+	}
+	@keyframes slideOutToRight {
+		0%   { transform: translateX(0%); }
+		10%  { transform: translateX(25%); }
+		80%  { transform: translateX(90%); }
+		100% { transform: translateX(100%); }
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.slide-in-right,
+		.slide-in-left,
+		.slide-out-left,
+		.slide-out-right {
+			animation: none !important;
+			transform: translateX(0%);
+		}
 	}
 </style>
