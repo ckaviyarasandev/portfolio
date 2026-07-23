@@ -9,17 +9,26 @@
 	import ExperiencePage from './experience/experiencePage.svelte';
 
 	const notFoundGradient = generateGradient(notFoundPalette);
+	const pagePalettes = Object.fromEntries(
+		Object.values(navbarLinks).map((link, index) => [link.page, heroPageColors[index % heroPageColors.length]])
+	);
 
 	let { page } = $props();
 
-	let currentGradient = $state(generateGradient(heroPageColors[0]));
+	let currentGradient = $state(generateGradient(pagePalettes[navbarLinks.home.page]));
 
 	let isKnownPage = $derived(Object.values(navbarLinks).some((link) => link.page === page));
 	let isNotFound = $derived(!isKnownPage);
 	let isHome = $derived(!isNotFound && page === navbarLinks.home.page);
 	let experiencePage = $derived(page === navbarLinks.experience.page);
 
-	let activeBackground = $derived(isHome ? currentGradient : isNotFound ? notFoundGradient : null);
+	let activeBackground = $derived(isKnownPage ? currentGradient : notFoundGradient);
+
+	$effect(() => {
+		if (isKnownPage && !isHome && !experiencePage) {
+			currentGradient = generateGradient(pagePalettes[page]);
+		}
+	});
 
 	function navigateTo(targetPage) {
 		const path = targetPage === navbarLinks.home.page ? '/' : `/${targetPage}`;
