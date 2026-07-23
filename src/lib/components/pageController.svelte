@@ -7,10 +7,15 @@
 	import { heroPageColors, notFoundPalette } from '../../themes/styles.js';
 	import { generateGradient } from '../../utils/gradientGenerator';
 	import ExperiencePage from './experience/experiencePage.svelte';
+	import SkillsPage from './skills/skillsPage.svelte';
+	import ContactPage from './contact/contactPage.svelte';
 
 	const notFoundGradient = generateGradient(notFoundPalette);
 	const pagePalettes = Object.fromEntries(
-		Object.values(navbarLinks).map((link, index) => [link.page, heroPageColors[index % heroPageColors.length]])
+		Object.values(navbarLinks).map((link, index) => [
+			link.page,
+			heroPageColors[index % heroPageColors.length]
+		])
 	);
 
 	let { page } = $props();
@@ -21,6 +26,8 @@
 	let isNotFound = $derived(!isKnownPage);
 	let isHome = $derived(!isNotFound && page === navbarLinks.home.page);
 	let experiencePage = $derived(page === navbarLinks.experience.page);
+	let skillsPage = $derived(page === navbarLinks.skills.page);
+	let contactPage = $derived(page === navbarLinks.contact.page);
 
 	let activeBackground = $derived(isKnownPage ? currentGradient : notFoundGradient);
 
@@ -35,8 +42,8 @@
 		goto(path);
 	}
 
-	function handleNavigate(page) {
-		selectedPage = page;
+	function handleNavigate(targetPage) {
+		navigateTo(targetPage);
 	}
 </script>
 
@@ -71,6 +78,10 @@
 			onBackgroundChange={(gradient) => (currentGradient = gradient)}
 			onNavigate={handleNavigate}
 		/>
+	{:else if skillsPage}
+		<SkillsPage onNavigate={handleNavigate} />
+	{:else if contactPage}
+		<ContactPage onNavigate={handleNavigate} />
 	{:else if isNotFound}
 		<NotFound />
 	{/if}

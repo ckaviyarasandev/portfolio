@@ -1,4 +1,5 @@
 <script>
+	import ScrollbarStyles from '../../../themes/scrollbarStyles.svelte';
 	import { LAYOUTS, DEFAULT_LAYOUT } from './slideShow/layouts/index.js';
 
 	let { section, status = 'resting', direction = 1, active = true } = $props();
@@ -20,6 +21,8 @@
 	);
 </script>
 
+<ScrollbarStyles />
+
 <div
 	class="glass-scroll absolute inset-0 overflow-y-auto overscroll-contain {animationClass}"
 	style="
@@ -38,43 +41,6 @@
 </div>
 
 <style>
-	.glass-scroll {
-		scrollbar-width: thin;
-		scrollbar-color: rgba(255, 255, 255, 0.35) transparent;
-	}
-
-	.glass-scroll::-webkit-scrollbar {
-		width: 8px;
-	}
-
-	.glass-scroll::-webkit-scrollbar-track {
-		background: rgba(255, 255, 255, 0.04);
-		border-radius: 999px;
-		margin-block: 4px;
-	}
-
-	.glass-scroll::-webkit-scrollbar-thumb {
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.2));
-		border-radius: 999px;
-		border: 2px solid transparent;
-		background-clip: padding-box;
-		backdrop-filter: blur(6px);
-		transition:
-			background 0.25s ease,
-			box-shadow 0.25s ease;
-	}
-
-	.glass-scroll::-webkit-scrollbar-thumb:hover {
-		background: linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.35));
-		background-clip: padding-box;
-		box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-	}
-
-	.glass-scroll::-webkit-scrollbar-thumb:active {
-		background: rgba(255, 255, 255, 0.85);
-		background-clip: padding-box;
-	}
-
 	.slide-parked {
 		transform: translateX(100%);
 		visibility: hidden;
@@ -103,60 +69,28 @@
 	}
 
 	@keyframes slideInFromRight {
-		0% {
-			transform: translateX(100%);
-		}
-		10% {
-			transform: translateX(75%);
-		}
-		80% {
-			transform: translateX(10%);
-		}
-		100% {
-			transform: translateX(0%);
-		}
+		0% { transform: translateX(100%); }
+		10% { transform: translateX(75%); }
+		80% { transform: translateX(10%); }
+		100% { transform: translateX(0%); }
 	}
 	@keyframes slideInFromLeft {
-		0% {
-			transform: translateX(-100%);
-		}
-		10% {
-			transform: translateX(-75%);
-		}
-		80% {
-			transform: translateX(-10%);
-		}
-		100% {
-			transform: translateX(0%);
-		}
+		0% { transform: translateX(-100%); }
+		10% { transform: translateX(-75%); }
+		80% { transform: translateX(-10%); }
+		100% { transform: translateX(0%); }
 	}
 	@keyframes slideOutToLeft {
-		0% {
-			transform: translateX(0%);
-		}
-		10% {
-			transform: translateX(-25%);
-		}
-		80% {
-			transform: translateX(-90%);
-		}
-		100% {
-			transform: translateX(-100%);
-		}
+		0% { transform: translateX(0%); }
+		10% { transform: translateX(-25%); }
+		80% { transform: translateX(-90%); }
+		100% { transform: translateX(-100%); }
 	}
 	@keyframes slideOutToRight {
-		0% {
-			transform: translateX(0%);
-		}
-		10% {
-			transform: translateX(25%);
-		}
-		80% {
-			transform: translateX(90%);
-		}
-		100% {
-			transform: translateX(100%);
-		}
+		0% { transform: translateX(0%); }
+		10% { transform: translateX(25%); }
+		80% { transform: translateX(90%); }
+		100% { transform: translateX(100%); }
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -167,15 +101,6 @@
 			animation: none !important;
 			transform: translateX(0%);
 		}
-	}
-
-	.slide-root::-webkit-scrollbar {
-		width: 6px;
-	}
-
-	.slide-root::-webkit-scrollbar-thumb {
-		background: rgba(255, 255, 255, 0.25);
-		border-radius: 3px;
 	}
 
 	:global(.text-shadow-sm) {
