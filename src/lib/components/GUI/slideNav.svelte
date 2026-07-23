@@ -1,6 +1,7 @@
 <script module>
 	export const INTERVAL = 5000;
-	export const TRANSITION_MS = 600;
+	// 100ms + 300ms + 500ms + 900ms four-phase timeline used by slideShow.svelte's keyframes
+	export const TRANSITION_MS = 1800;
 </script>
 
 <script>
@@ -31,6 +32,28 @@
 </script>
 
 {#if sections.length > 1}
+	<button
+		type="button"
+		onclick={prevSlide}
+		aria-label="Previous slide"
+		class="absolute top-4 right-4 z-20 rounded-full bg-white/10 p-2 text-white backdrop-blur transition hover:bg-white/20"
+	>
+		<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<polyline points="18 15 12 9 6 15" />
+		</svg>
+	</button>
+
+	<button
+		type="button"
+		onclick={nextSlide}
+		aria-label="Next slide"
+		class="absolute bottom-4 right-4 z-20 rounded-full bg-white/10 p-2 text-white backdrop-blur transition hover:bg-white/20"
+	>
+		<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+			<polyline points="6 9 12 15 18 9" />
+		</svg>
+	</button>
+
 	<div class="absolute bottom-2 left-1/2 z-20 flex -translate-x-1/2 gap-2 sm:bottom-4">
 		{#each sections as section, i (section.id)}
 			<button

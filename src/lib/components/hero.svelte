@@ -24,6 +24,10 @@
 	let touchStartY = 0;
 
 	let slideNav;
+	let containerEl;
+
+	let wheelLocked = false;
+	const WHEEL_THRESHOLD = 12;
 
 	$effect(() => {
 		onBackgroundChange?.(currentGradient);
@@ -77,9 +81,42 @@
 		startTimer();
 	}
 
+	function isTypingTarget(e) {
+		const tag = e.target?.tagName;
+		return tag === 'INPUT' || tag === 'TEXTAREA' || e.target?.isContentEditable;
+	}
+
 	function handleKeydown(e) {
-		if (e.key === 'ArrowRight') nextSlide();
-		if (e.key === 'ArrowLeft') prevSlide();
+		if (isTypingTarget(e)) return;
+		if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+			e.preventDefault();
+			nextSlide();
+		}
+		if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+			e.preventDefault();
+			prevSlide();
+		}
+	}
+
+	function handleWheel(e) {
+		if (Math.abs(e.deltaY) < WHEEL_THRESHOLD) return;
+
+		// If the active slide's own content is scrollable, let it scroll until
+		// it hits the edge in the scroll direction before changing slides.
+		const activeEl = containerEl?.querySelector('.glass-scroll[aria-hidden="false"]');
+		if (activeEl) {
+			const atTop = activeEl.scrollTop <= 0;
+			const atBottom = activeEl.scrollTop + activeEl.clientHeight >= activeEl.scrollHeight - 1;
+			if (e.deltaY > 0 && !atBottom) return;
+			if (e.deltaY < 0 && !atTop) return;
+		}
+
+		if (wheelLocked || isAnimating) return;
+		e.preventDefault();
+		wheelLocked = true;
+		setTimeout(() => (wheelLocked = false), TRANSITION_MS + 200);
+
+		e.deltaY > 0 ? nextSlide() : prevSlide();
 	}
 
 	function handleTouchStart(e) {
@@ -110,12 +147,14 @@
 
 <svelte:window onkeydown={handleKeydown} />
 <div
+	bind:this={containerEl}
 	class="relative z-10 mx-auto w-full"
 	role="region"
 	onmouseenter={handlePause}
 	onmouseleave={handleResume}
 	ontouchstart={handleTouchStart}
 	ontouchend={handleTouchEnd}
+	onwheel={handleWheel}
 >
 	<div
 		class="relative w-full overflow-hidden h-[calc(100dvh)] px-4"

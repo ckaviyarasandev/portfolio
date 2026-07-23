@@ -31,7 +31,7 @@
 	"
 	aria-hidden={!active}
 >
-	<div class="p-6 mx-auto mt-8 flex min-h-full w-full items-center justify-center">
+	<div class="t-12 p-6 mx-auto flex min-h-full w-full items-center justify-center">
 		<div
 			class="slide-root w-full box-border shrink-0 overflow-x-hidden overflow-y-auto [-webkit-overflow-scrolling:touch]"
 		>
@@ -51,45 +51,108 @@
 		visibility: visible;
 	}
 
+	/*
+	 * Four-phase timeline (total = 100ms + 300ms + 500ms + 900ms = 1800ms, set
+	 * via TRANSITION_MS in slideNav.svelte and piped in through --slide-duration):
+	 *   phase 1 — first 10% of the distance, played over the first  100ms (5.56%)
+	 *   phase 2 — next  15% of the distance, played over the next   300ms (22.22%)
+	 *   phase 3 — next  70% of the distance, played over the next   500ms (50%)
+	 *   phase 4 — final  5% of the distance, played over the final  900ms (100%)
+	 * A short, gentle wind-up, a quick pickup, the fast middle rush covering
+	 * most of the ground, then a long slow settle over the last sliver of
+	 * distance instead of an abrupt stop.
+	 */
 	.slide-in-right {
 		visibility: visible;
-		animation: slideInFromRight var(--slide-duration, 600ms) linear forwards;
+		animation: slideInFromRight var(--slide-duration, 1800ms) linear forwards;
 	}
 	.slide-in-left {
 		visibility: visible;
-		animation: slideInFromLeft var(--slide-duration, 600ms) linear forwards;
+		animation: slideInFromLeft var(--slide-duration, 1800ms) linear forwards;
 	}
 	.slide-out-left {
 		visibility: visible;
-		animation: slideOutToLeft var(--slide-duration, 600ms) linear forwards;
+		animation: slideOutToLeft var(--slide-duration, 1800ms) linear forwards;
 	}
 	.slide-out-right {
 		visibility: visible;
-		animation: slideOutToRight var(--slide-duration, 600ms) linear forwards;
+		animation: slideOutToRight var(--slide-duration, 1800ms) linear forwards;
 	}
 
 	@keyframes slideInFromRight {
-		0% { transform: translateX(100%); }
-		10% { transform: translateX(75%); }
-		80% { transform: translateX(10%); }
+		0% {
+			transform: translateX(100%);
+			animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+		}
+		5.56% {
+			transform: translateX(90%);
+			animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+		}
+		22.22% {
+			transform: translateX(75%);
+			animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+		}
+		50% {
+			transform: translateX(5%);
+			animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+		}
 		100% { transform: translateX(0%); }
 	}
 	@keyframes slideInFromLeft {
-		0% { transform: translateX(-100%); }
-		10% { transform: translateX(-75%); }
-		80% { transform: translateX(-10%); }
+		0% {
+			transform: translateX(-100%);
+			animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+		}
+		5.56% {
+			transform: translateX(-90%);
+			animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+		}
+		22.22% {
+			transform: translateX(-75%);
+			animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+		}
+		50% {
+			transform: translateX(-5%);
+			animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+		}
 		100% { transform: translateX(0%); }
 	}
 	@keyframes slideOutToLeft {
-		0% { transform: translateX(0%); }
-		10% { transform: translateX(-25%); }
-		80% { transform: translateX(-90%); }
+		0% {
+			transform: translateX(0%);
+			animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+		}
+		5.56% {
+			transform: translateX(-10%);
+			animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+		}
+		22.22% {
+			transform: translateX(-25%);
+			animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+		}
+		50% {
+			transform: translateX(-95%);
+			animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+		}
 		100% { transform: translateX(-100%); }
 	}
 	@keyframes slideOutToRight {
-		0% { transform: translateX(0%); }
-		10% { transform: translateX(25%); }
-		80% { transform: translateX(90%); }
+		0% {
+			transform: translateX(0%);
+			animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1);
+		}
+		5.56% {
+			transform: translateX(10%);
+			animation-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
+		}
+		22.22% {
+			transform: translateX(25%);
+			animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1);
+		}
+		50% {
+			transform: translateX(95%);
+			animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+		}
 		100% { transform: translateX(100%); }
 	}
 
