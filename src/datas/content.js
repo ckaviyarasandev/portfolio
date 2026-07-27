@@ -13,15 +13,15 @@ export const pageTitles = [
 
 export const heroPageSections = [
 	{
-		id: 'welcome',
-
-		title: 'Welcome!',
-
-		subtitle: 'Thanks for stopping by.',
-
-		description:
-			"Hi, I'm Kaviyarasan, a Web Developer who enjoys building modern, responsive, and user-friendly web applications. Whether you're a recruiter, hiring manager, fellow developer, colleague, friend, or simply exploring my work, I'm glad you're here. This portfolio is a collection of my experience, projects, and continuous journey as a developer.",
-
+		id: 'hero',
+		layout: 'hero',
+		title: 'Kaviyarasan C',
+		subtitle: 'Web Developer — Svelte · Node.js · GraphQL',
+		description: [
+			'I build scalable, user-friendly web applications end-to-end — from responsive Svelte front ends to the GraphQL APIs and MongoDB data models behind them.',
+			"Based in Salem, Tamil Nadu, I've spent the last two years shipping features for a live EdTech learning platform, alongside a stint building low-code automation tools on Microsoft Power Platform.",
+			'I care about clean, minimal code and data-driven component architecture — building things that are easy to extend, not just easy to ship once.'
+		],
 		image: {
 			src: '/images/profile_transparent.png',
 			alt: 'Portrait of Kaviyarasan',
@@ -29,457 +29,297 @@ export const heroPageSections = [
 			shape: 'circle', // 'circle' | 'rounded' | 'square'
 			frame: 'elevated' // 'plain' | 'bordered' | 'elevated' | 'background'
 		},
-
+		highlights: [
+			{ title: 'Experience', value: '2+ years' },
+			{ title: 'Core Stack', value: 'Svelte · Node.js · GraphQL' },
+			{ title: 'Projects Shipped', value: '5+' },
+			{ title: 'Based in', value: 'Salem, Tamil Nadu, India' }
+		],
 		buttons: [
-			{
-				label: 'Explore Portfolio',
-				type: 'scroll',
-				target: '#about',
-				variant: 'primary'
-			},
+			{ label: 'View Projects', type: 'scroll', target: 'projects', variant: 'primary' },
 			{
 				label: 'Download Resume',
 				type: 'download',
-				href: '/resume.pdf',
+				href: '/resume-kaviyarasan.pdf',
 				variant: 'secondary'
-			}
-		],
+			},
+			{ label: 'Get in Touch', type: 'scroll', target: 'connect', variant: 'secondary' }
+		]
+	},
 
-		links: [
+	// ─────────────────────────────────────────────
+	// 2. ABOUT
+	// ─────────────────────────────────────────────
+	{
+		id: 'about',
+		layout: 'about',
+		title: 'About Me',
+		subtitle: 'Web Developer · Salem, Tamil Nadu',
+		description: [
+			"I'm a web developer with over two years of experience building front-end features and backend APIs for real products — most recently an EdTech learning platform used by students across multiple course tracks.",
+			"My core stack is JavaScript, Svelte/SvelteKit, Tailwind CSS, and Node.js with GraphQL and MongoDB on the backend. I've also spent time in the Microsoft Power Platform world — Power Apps, Power Automate, and Copilot Studio — building business automation tools.",
+			'I care about clean, minimal code, co-located concerns, and data-driven component architectures over hardcoded UI.'
+		],
+		highlights: [
+			{ title: 'Experience', value: '2+ years' },
+			{ title: 'Location', value: 'Salem, Tamil Nadu, India' },
+			{ title: 'Education', value: 'B.Sc Computer Science, Periyar University' },
+			{ title: 'Focus', value: 'Svelte · Node.js · GraphQL' }
+		]
+	},
+
+	// ─────────────────────────────────────────────
+	// 3. JOURNEY (career timeline)
+	// ─────────────────────────────────────────────
+	{
+		id: 'journey',
+		layout: 'journey',
+		title: 'My Journey',
+		subtitle: "Where I've worked and what I built",
+		categories: [
 			{
-				label: 'GitHub',
-				icon: 'github',
-				href: 'https://github.com/yourusername'
+				title: 'Web Developer — Sharp Abacus (Remote, Bangalore)',
+				description: 'Jul 2024 – Jun 2026',
+				items: [
+					'Developed and optimized front-end features using Svelte, JavaScript, and Tailwind CSS, improving page load performance and UX',
+					'Built reusable UI components, reducing development time for new features',
+					'Designed and integrated GraphQL APIs using Node.js and MongoDB for efficient data handling',
+					'Updated data models, wrote migration scripts, and created API endpoints'
+				]
 			},
 			{
-				label: 'LinkedIn',
-				icon: 'linkedin',
-				href: 'https://linkedin.com/in/yourusername'
+				title: 'Intern — Low Code Development, Genpact (Bangalore)',
+				description: 'Jan 2024 – Jun 2024',
+				items: [
+					'Built business applications using Power Apps, Power Automate, Copilot Studio, and Dataverse to automate workflows',
+					'Developed automation flows that reduced manual task effort and improved process efficiency',
+					'Collaborated cross-functionally to translate business requirements into scalable solutions',
+					'Strengthened corporate communication, documentation, and workflow design skills'
+				]
+			},
+			{
+				title: 'Web Development Intern — Sharp Abacus (Remote, Bangalore)',
+				description: 'Jul 2023 – Dec 2023',
+				items: [
+					'Developed responsive UI features using HTML, CSS, JavaScript, Tailwind CSS, and Svelte',
+					'Fixed UI bugs and improved application usability and performance',
+					'Used Git and GitHub for version control and collaboration',
+					'Debugged and tested applications using Chrome DevTools'
+				]
 			}
 		]
 	},
 
+	// ─────────────────────────────────────────────
+	// 4. TECH STACK
+	// ─────────────────────────────────────────────
 	{
-		title: 'About Me',
-
-		subtitle:
-			'Building modern web experiences through clean code, thoughtful design, and continuous learning.',
-
-		description: [
-			"I'm Kaviyarasan, a Frontend Developer with over two years of professional experience building modern, responsive, and user-friendly web applications. I enjoy transforming ideas into digital experiences that are both functional and enjoyable to use.",
-
-			'My primary focus is frontend development using Svelte, JavaScript, and Tailwind CSS, while also working with Node.js, GraphQL, and MongoDB to build complete web solutions. I enjoy understanding how every part of an application works together.',
-
-			"Throughout my journey, I've contributed to educational platforms, enterprise automation solutions, and AI-powered applications. These experiences have strengthened my ability to build reusable components, improve performance, solve real-world problems, and collaborate effectively within development teams.",
-
-			'I believe great software is built through curiosity, continuous learning, and attention to detail. Every project is an opportunity to write cleaner code, create better user experiences, and grow as a developer.'
-		],
-
-		highlights: [
-			{
-				title: 'Experience',
-				value: '2+ Years'
-			},
-			{
-				title: 'Projects',
-				value: '10+'
-			},
-			{
-				title: 'Primary Focus',
-				value: 'Frontend Development'
-			},
-			{
-				title: 'Current Goal',
-				value: 'Building scalable web applications'
-			}
-		],
-
-		buttons: [
-			{
-				label: 'Download Resume',
-				type: 'download',
-				href: '/resume.pdf',
-				variant: 'primary'
-			},
-			{
-				label: 'View Projects',
-				type: 'scroll',
-				target: '#projects',
-				variant: 'secondary'
-			}
-		],
-
-		image: {
-			src: '/images/profile.webp',
-			alt: 'Kaviyarasan',
-			position: 'left'
-		}
-	},
-	{
-		id: 'journey',
-		layout: 'journey',
-
-		title: 'My Journey',
-
-		subtitle: 'Growing through curiosity, experience, and continuous learning.',
-
-		description:
-			"My journey into web development began with a curiosity about how websites work and quickly grew into a passion for creating digital experiences. Over the past two years, I've had the opportunity to work on educational platforms, business applications, and AI-powered solutions. Every project has introduced new challenges, strengthened my problem-solving skills, and helped me become a more confident and adaptable developer.",
-
-		image: {
-			src: '/images/journey.webp',
-			alt: 'Web development journey illustration',
-			position: 'left',
-			shape: 'rounded',
-			frame: 'background'
-		},
-
-		buttons: [
-			{
-				label: 'View Experience',
-				type: 'navigate',
-				href: '/experience',
-				variant: 'primary'
-			}
-		],
-
-		links: []
-	},
-	{
-		id: 'technology-stack',
-
+		id: 'techStack',
 		layout: 'techStack',
-
-		title: 'Technology Stack',
-
-		subtitle: 'The technologies I use to build modern, scalable web applications.',
-
-		description:
-			'My primary focus is modern web development with Svelte, JavaScript, and Tailwind CSS, creating fast, responsive, and maintainable user interfaces. Beyond the frontend, I work with Node.js, GraphQL, and MongoDB to develop APIs and data-driven applications. I also have experience building business automation and AI-powered solutions using the Microsoft Power Platform, allowing me to contribute across both traditional web development and enterprise automation projects.',
-
+		title: 'Tech Stack',
+		subtitle: 'Tools I build with',
 		categories: [
 			{
-				title: 'Frontend',
-				items: ['HTML5', 'CSS3', 'JavaScript (ES6+)', 'Svelte', 'Tailwind CSS']
-			},
-			{
-				title: 'Backend',
-				items: ['Node.js', 'GraphQL']
-			},
-			{
-				title: 'Database',
-				items: ['MongoDB']
+				title: 'Web Technologies',
+				description: 'Core front-end and back-end stack',
+				items: [
+					'JavaScript',
+					'HTML',
+					'CSS',
+					'Svelte',
+					'Tailwind CSS',
+					'Node.js',
+					'GraphQL',
+					'MongoDB'
+				]
 			},
 			{
 				title: 'Microsoft Power Platform',
+				description: 'Low-code automation and enterprise tooling',
 				items: ['Power Apps', 'Power Automate', 'Copilot Studio', 'Dataverse', 'Microsoft Azure']
 			},
 			{
 				title: 'Development Tools',
+				description: 'Day-to-day workflow',
 				items: ['Git', 'GitHub', 'Visual Studio Code', 'Chrome DevTools']
 			}
-		],
-
-		highlights: [
-			'Responsive Web Development',
-			'Reusable UI Components',
-			'GraphQL API Integration',
-			'Backend Development',
-			'Enterprise Automation',
-			'AI-powered Solutions'
-		],
-
-		buttons: [
-			{
-				label: 'View Projects',
-				type: 'navigate',
-				href: '/projects',
-				variant: 'primary'
-			}
 		]
 	},
+
+	// ─────────────────────────────────────────────
+	// 5. PHILOSOPHY
+	// ─────────────────────────────────────────────
 	{
-		id: 'development-philosophy',
-
+		id: 'philosophy',
 		layout: 'philosophy',
-
-		title: 'Development Philosophy',
-
-		subtitle: 'Building software that is clean, reliable, and designed to last.',
-
-		description:
-			'I believe great software is more than writing code that works—it should be intuitive, maintainable, and deliver a meaningful experience for its users. My approach focuses on writing clean, reusable components, choosing the right technologies for the problem, and continuously refining both performance and code quality. Every project is an opportunity to learn, improve, and create solutions that remain valuable as they evolve.',
-
+		title: 'How I Work',
+		subtitle: 'Principles behind the code',
 		principles: [
 			{
-				title: 'User First',
+				title: 'Clean, minimal code',
 				description:
-					'Every feature should improve the user experience through clarity, accessibility, and responsiveness.'
+					'Favor simple, readable solutions over clever ones — code should be easy to pick up months later.'
 			},
 			{
-				title: 'Clean & Maintainable',
+				title: 'Co-located concerns',
 				description:
-					'I write modular, reusable, and well-structured code that is easy to understand and extend.'
+					"Keep a component's logic, styling, and markup together so related changes stay in one place."
 			},
 			{
-				title: 'Performance Matters',
+				title: 'Data-driven architecture',
 				description:
-					'I aim to build fast, optimized applications that provide a smooth experience across devices.'
-			},
-			{
-				title: 'Continuous Learning',
-				description:
-					'I embrace new technologies, best practices, and constructive feedback to grow with every project.'
+					'Build registry-based, configuration-driven components instead of hardcoded conditionals, so new content or layouts drop in without touching core logic.'
 			}
 		],
-
 		quote:
-			"Good software isn't just about solving today's problem—it's about creating solutions that remain valuable tomorrow.",
-
-		buttons: [
-			{
-				label: 'See My Projects',
-				type: 'navigate',
-				href: '/projects',
-				variant: 'primary'
-			}
-		]
+			"Good architecture is the kind that lets new features drop in without rewriting what's already there."
 	},
+
+	// ─────────────────────────────────────────────
+	// 6. PROBLEM SOLVING
+	// ─────────────────────────────────────────────
 	{
-		id: 'problem-solving',
-
+		id: 'problemSolving',
 		layout: 'problemSolving',
-
 		title: 'Problem Solving',
-
-		subtitle: 'Every challenge is an opportunity to build a better solution.',
-
-		description:
-			"I enjoy solving problems by understanding both the technical challenge and the user's needs. Whether it's debugging complex issues, improving application performance, designing reusable components, or implementing new features, I focus on finding solutions that are practical, maintainable, and scalable. My goal isn't just to fix problems—it's to leave the codebase better than I found it.",
-
+		subtitle: 'How I approach a new feature or bug',
 		approach: [
 			{
-				title: 'Understand First',
-				description: 'I start by understanding the root cause before writing a solution.'
-			},
-			{
-				title: 'Build Thoughtfully',
-				description: 'I aim for solutions that are clean, reusable, and easy to maintain.'
-			},
-			{
-				title: 'Test & Refine',
+				title: 'Understand the root cause',
 				description:
-					'I verify functionality, consider edge cases, and improve the overall user experience.'
+					'Before touching code, get a clear picture of why something behaves the way it does — not just the symptom.'
 			},
 			{
-				title: 'Learn & Improve',
-				description: 'Every challenge teaches something new that I can apply to future projects.'
-			}
-		],
-
-		examples: [
-			'Debugging complex UI issues',
-			'Optimizing frontend performance',
-			'Designing reusable Svelte components',
-			'Building GraphQL integrations',
-			'Automating business workflows',
-			'Improving application maintainability'
-		],
-
-		quote:
-			'I believe the best solutions come from understanding the problem before writing the code.',
-
-		buttons: [
+				title: 'Design for reuse',
+				description: 'Look for the reusable component or utility hiding inside a one-off request.'
+			},
 			{
-				label: 'View My Projects',
-				type: 'navigate',
-				href: '/projects',
-				variant: 'primary'
+				title: 'Validate with real data',
+				description:
+					'Test against real-world inputs — course data, student records, automation triggers — not just happy-path cases.'
+			},
+			{
+				title: 'Iterate with the team',
+				description:
+					'Share progress early, especially on cross-functional Power Platform projects where requirements shift.'
 			}
 		]
 	},
+
+	// ─────────────────────────────────────────────
+	// 7. LEARNING
+	// ─────────────────────────────────────────────
 	{
-		id: 'continuous-learning',
-
+		id: 'learning',
 		layout: 'learning',
-
-		title: 'Continuous Learning',
-
-		subtitle: 'Technology evolves every day, and so do I.',
-
-		description:
-			'I believe learning is a continuous journey rather than a destination. Every project introduces new ideas, every challenge teaches a valuable lesson, and every technology opens the door to better solutions. I enjoy exploring modern frameworks, improving my development practices, and expanding my understanding of both frontend and backend development. Staying curious and adapting to change helps me build better software and grow as a developer.',
-
+		title: 'Currently Learning',
+		subtitle: "Skills I'm actively building",
 		learningAreas: [
 			{
-				title: 'Modern Web Development',
-				description:
-					'Keeping up with modern JavaScript, Svelte, and evolving frontend best practices.'
+				title: 'Advanced Svelte 5',
+				description: 'Runes, shared stores, and data-driven component registries'
 			},
 			{
-				title: 'Backend Technologies',
-				description:
-					'Strengthening my understanding of APIs, GraphQL, databases, and scalable application architecture.'
+				title: 'Backend architecture',
+				description: 'GraphQL API design patterns and MongoDB data modeling at scale'
 			},
 			{
-				title: 'AI & Automation',
-				description:
-					'Exploring AI-powered workflows and business automation to solve real-world problems.'
-			},
-			{
-				title: 'Software Engineering',
-				description:
-					'Continuously improving code quality, architecture, testing, and maintainability.'
+				title: 'System design',
+				description: 'Structuring larger applications for maintainability and performance'
 			}
 		],
-
 		currentFocus: [
-			'Advanced Svelte & SvelteKit',
-			'Scalable application architecture',
-			'Performance optimization',
-			'UI/UX best practices',
-			'Clean and maintainable code'
-		],
-
-		quote: 'The best developers never stop learning—they keep improving one project at a time.',
-
-		buttons: [
-			{
-				label: 'Explore My Projects',
-				type: 'navigate',
-				href: '/projects',
-				variant: 'primary'
-			}
+			'Refining a data-driven content architecture for this portfolio site',
+			'Deepening GraphQL + Node.js backend skills',
+			'Exploring Azure-integrated Power Platform automation patterns'
 		]
 	},
+
+	// ─────────────────────────────────────────────
+	// 8. PROJECTS
+	// ─────────────────────────────────────────────
 	{
-		id: 'featured-projects',
-
+		id: 'projects',
 		layout: 'projects',
-
-		title: 'Featured Projects',
-
-		subtitle: 'Building solutions that solve real-world problems.',
-
-		description:
-			"Throughout my journey, I've worked on projects ranging from modern web applications and educational platforms to enterprise automation and AI-powered solutions. Every project has strengthened my technical skills, challenged my problem-solving abilities, and reinforced the importance of writing clean, maintainable software that delivers real value.",
-
+		title: 'Projects',
+		subtitle: 'Selected work',
 		categories: [
 			{
-				title: 'Web Applications',
+				title: 'Sharp Abacus Learning Platform',
 				description:
-					'Responsive and modern applications built with Svelte, JavaScript, and Tailwind CSS.'
+					'EdTech / Web Application — Svelte.js, JavaScript, Tailwind CSS, Node.js, GraphQL, MongoDB',
+				items: [
+					'Built learning modules including Vedic Maths, Junior Abacus, and Global Competition features for student engagement',
+					'Built reusable, responsive UI components with Svelte.js and Tailwind CSS for performance and maintainability',
+					'Implemented video upload, playback, rating system, and leaderboard for performance tracking',
+					'Integrated screen recording, screenshot capture, and custom input systems for interactivity'
+				]
 			},
 			{
-				title: 'Enterprise Solutions',
+				title: 'Knowledge Management Chatbot',
 				description:
-					'Business applications and workflow automation using the Microsoft Power Platform.'
+					'Enterprise / AI Automation — Microsoft Copilot Studio, Power Automate, Dataverse',
+				items: [
+					'Built an AI-powered chatbot for conversational, document-upload, and query-based knowledge search',
+					'Implemented custom suggestion flows with selectable options and image-based prompts for quick navigation'
+				]
 			},
 			{
-				title: 'Full-Stack Development',
-				description: 'Developing GraphQL APIs, backend services, and MongoDB-powered applications.'
+				title: 'Invoice Processing Automation',
+				description: 'Business Process Automation — Power Automate, OneDrive, Dataverse',
+				items: [
+					'Built an automated pipeline: files uploaded to OneDrive were processed, data extracted, and stored in Dataverse',
+					'Implemented success/failure tracking for reliable document processing'
+				]
 			},
 			{
-				title: 'AI & Automation',
+				title: 'AP Helpdesk Management System',
+				description: 'Enterprise / Workflow Management — Power Apps, Power Automate, OneDrive',
+				items: [
+					'Built a helpdesk system managing real-time emails and meetings with reply, flag, read/unread, and delete features',
+					'Streamlined communication workflows and improved operational efficiency'
+				]
+			},
+			{
+				title: 'Automatic Email Response Generator',
 				description:
-					'Creating intelligent workflows and AI-assisted solutions to improve productivity.'
-			}
-		],
-
-		highlights: [
-			'Responsive UI Design',
-			'Reusable Component Architecture',
-			'GraphQL Integration',
-			'Business Process Automation',
-			'Performance Optimization',
-			'Modern Development Practices'
-		],
-
-		quote:
-			'Every project represents a challenge solved, a lesson learned, and another step forward in my growth as a developer.',
-
-		buttons: [
-			{
-				label: 'Explore Projects',
-				type: 'navigate',
-				href: '/projects',
-				variant: 'primary'
-			},
-			{
-				label: 'GitHub',
-				type: 'external',
-				href: 'https://github.com/yourusername',
-				variant: 'secondary'
+					'AI Automation / Enterprise Tools — Power Apps, Power Automate, Dataverse, Azure',
+				items: [
+					'Built an AI system that extracts intent, requirements, emotion, and flags from incoming emails',
+					'Integrated database retrieval to generate structured email outputs (subject, title, body) with review/edit before sending'
+				]
 			}
 		]
 	},
+
+	// ─────────────────────────────────────────────
+	// 9. CONNECT
+	// ─────────────────────────────────────────────
 	{
-		id: 'lets-connect',
-
+		id: 'connect',
 		layout: 'connect',
-
 		title: "Let's Connect",
-
-		subtitle: 'Thanks for visiting my portfolio.',
-
-		description:
-			"I appreciate you taking the time to explore my work and learn about my journey as a developer. Whether you're a recruiter, hiring manager, fellow developer, or someone with an interesting idea, I'd be happy to connect. I'm always open to discussing new opportunities, collaborating on meaningful projects, or simply having a conversation about technology and software development.",
-
+		subtitle: 'Open to new opportunities and collaborations',
 		contactMethods: [
-			{
-				title: 'Email',
-				value: 'kaviyarasan@example.com',
-				icon: 'mail'
-			},
-			{
-				title: 'LinkedIn',
-				value: 'linkedin.com/in/kaviyarasan',
-				icon: 'linkedin'
-			},
-			{
-				title: 'GitHub',
-				value: 'github.com/kaviyarasan',
-				icon: 'github'
-			},
-			{
-				title: 'Location',
-				value: 'Tamil Nadu, India',
-				icon: 'location'
-			}
+			{ title: 'Email', value: 'cmkkaviyarasanmm@gmail.com', icon: 'mail' },
+			{ title: 'Location', value: 'Salem, Tamil Nadu, India', icon: 'location' }
 		],
-
-		quote:
-			'Great software is built by people who enjoy learning, collaborating, and solving meaningful problems together.',
-
+		links: [
+			{ label: 'GitHub', icon: 'github', href: 'https://github.com/YOUR-USERNAME' }, // TODO: replace with actual profile URL
+			{ label: 'LinkedIn', icon: 'linkedin', href: 'https://linkedin.com/in/YOUR-PROFILE' } // TODO: replace with actual profile URL
+		],
 		buttons: [
 			{
-				label: 'Get In Touch',
-				type: 'navigate',
-				href: '/contact',
+				label: 'Send an Email',
+				type: 'external',
+				href: 'mailto:cmkkaviyarasanmm@gmail.com',
 				variant: 'primary'
-			},
-			{
-				label: 'Download Resume',
-				type: 'download',
-				href: '/resume/Kaviyarasan_C_Resume.pdf',
-				variant: 'secondary'
-			}
-		],
-
-		links: [
-			{
-				label: 'GitHub',
-				icon: 'github',
-				href: 'https://github.com/yourusername'
-			},
-			{
-				label: 'LinkedIn',
-				icon: 'linkedin',
-				href: 'https://linkedin.com/in/yourprofile'
 			}
 		]
 	}
 ];
+
+export default heroPageSections;
 
 export const temp_heroPageSections = [
 	{

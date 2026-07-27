@@ -1,7 +1,7 @@
 <script module>
-	export const INTERVAL = 5000;
+	export const INTERVAL = 15000;
 	// 100ms + 300ms + 500ms + 900ms four-phase timeline used by slideShow.svelte's keyframes
-	export const TRANSITION_MS = 1800;
+	export const TRANSITION_MS = 800;
 </script>
 
 <script>

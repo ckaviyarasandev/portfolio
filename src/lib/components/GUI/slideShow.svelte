@@ -52,7 +52,7 @@
 	}
 
 	/*
-	 * Four-phase timeline (total = 100ms + 300ms + 500ms + 900ms = 1800ms, set
+	 * Four-phase timeline (total = 100ms + 300ms + 500ms + 900ms = 800ms, set
 	 * via TRANSITION_MS in slideNav.svelte and piped in through --slide-duration):
 	 *   phase 1 — first 10% of the distance, played over the first  100ms (5.56%)
 	 *   phase 2 — next  15% of the distance, played over the next   300ms (22.22%)
@@ -64,19 +64,19 @@
 	 */
 	.slide-in-right {
 		visibility: visible;
-		animation: slideInFromRight var(--slide-duration, 1800ms) linear forwards;
+		animation: slideInFromRight var(--slide-duration, 800ms) linear forwards;
 	}
 	.slide-in-left {
 		visibility: visible;
-		animation: slideInFromLeft var(--slide-duration, 1800ms) linear forwards;
+		animation: slideInFromLeft var(--slide-duration, 800ms) linear forwards;
 	}
 	.slide-out-left {
 		visibility: visible;
-		animation: slideOutToLeft var(--slide-duration, 1800ms) linear forwards;
+		animation: slideOutToLeft var(--slide-duration, 800ms) linear forwards;
 	}
 	.slide-out-right {
 		visibility: visible;
-		animation: slideOutToRight var(--slide-duration, 1800ms) linear forwards;
+		animation: slideOutToRight var(--slide-duration, 800ms) linear forwards;
 	}
 
 	@keyframes slideInFromRight {

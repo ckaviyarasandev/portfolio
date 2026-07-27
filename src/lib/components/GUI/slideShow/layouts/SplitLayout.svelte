@@ -18,6 +18,7 @@
 		<SlideHeading tag={section.tag} title={section.title} subtitle={section.subtitle} quote={section.quote} />
 		<SlideDescription description={section.description} />
 		<ActionGroup buttons={section.buttons} links={section.links} />
+		
 		<ContentBlocks {section} class="mt-4" />
 	</div>
 
