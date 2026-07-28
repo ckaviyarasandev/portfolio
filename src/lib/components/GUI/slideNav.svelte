@@ -1,5 +1,5 @@
 <script module>
-	export const INTERVAL = 15000;
+	export const INTERVAL = 30000;
 	export const TRANSITION_MS = 800;
 </script>
 

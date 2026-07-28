@@ -9,7 +9,7 @@
 </script>
 
 <section
-	class="relative flex w-full flex-col items-center gap-8 overflow-hidden text-center"
+	class="relative flex w-full p-4 flex-col items-center gap-8 overflow-hidden text-center"
 >
 	<SlideMedia image={section.image} />
 	<SlideHeading

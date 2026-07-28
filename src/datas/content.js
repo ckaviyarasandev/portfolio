@@ -11,7 +11,7 @@ export const pageTitles = [
 	'🧩 Debug • Commit • Repeat'
 ];
 
-export const heroPageSections = [
+export const allDetails = [
 	{
 		id: 'hero',
 		layout: 'hero',
@@ -392,9 +392,9 @@ export const heroPageSections = [
   }
 ];
 
-export default heroPageSections;
+export default allDetails;
 
-export const temp_heroPageSections = [
+export const temp_allDetails = [
 	{
 		title: 'Hello!',
 		description:

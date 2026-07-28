@@ -3,7 +3,7 @@
 	import Navbar from './Navbar.svelte';
 	import Hero from './hero.svelte';
 	import NotFound from './NotFound.svelte';
-	import { navbarLinks, heroPageSections } from '../../datas/content';
+	import { navbarLinks, allDetails } from '../../datas/content';
 	import { heroPageColors, notFoundPalette } from '../../themes/styles.js';
 	import { generateGradient } from '../../utils/gradientGenerator';
 	import ExperiencePage from './experience/experiencePage.svelte';
@@ -70,7 +70,7 @@
 
 	{#if isHome}
 		<Hero
-			sections={heroPageSections}
+			sections={allDetails}
 			onBackgroundChange={(gradient) => (currentGradient = gradient)}
 		/>
 	{:else if experiencePage}
