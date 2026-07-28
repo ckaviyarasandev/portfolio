@@ -16,7 +16,7 @@
 	}
 </script>
 
-<header class="fixed top-0 right-0 max-w-max z-50 px-4 mr-6">
+<header class="fixed top-0 right-0 max-w-max z-40 mr-10">
 	<nav
 		class="flex gap-6 max-w-max items-center justify-between rounded-b-4xl border border-t-0 px-10 py-2 shadow backdrop-blur-md transition-colors duration-500 motion-reduce:transition-none border-white/10 bg-white/5"
 	>
