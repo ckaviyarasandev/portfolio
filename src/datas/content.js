@@ -56,18 +56,27 @@ export const heroPageSections = [
 		title: 'About Me',
 		subtitle: 'Web Developer · Salem, Tamil Nadu',
 		description: [
-			"I'm a web developer with over two years of experience building front-end features and backend APIs for real products — most recently an EdTech learning platform used by students across multiple course tracks.",
-			"My core stack is JavaScript, Svelte/SvelteKit, Tailwind CSS, and Node.js with GraphQL and MongoDB on the backend. I've also spent time in the Microsoft Power Platform world — Power Apps, Power Automate, and Copilot Studio — building business automation tools.",
-			'I care about clean, minimal code, co-located concerns, and data-driven component architectures over hardcoded UI.'
+			"I'm a web developer with over two years of experience building front-end features and backend APIs for real products — most recently an EdTech learning platform used by students across multiple course tracks, including Vedic Maths and Junior Abacus modules.",
+			'My core stack is JavaScript, Svelte/SvelteKit, Tailwind CSS, and Node.js with GraphQL and MongoDB on the backend. Day to day that means building reusable UI components, designing GraphQL schemas, and writing migration scripts to keep data models clean as products grow.',
+			'Before that, I spent six months on the Microsoft Power Platform side at Genpact — building low-code business applications with Power Apps, Power Automate, and Copilot Studio, and automating workflows that used to take manual effort. It gave me a different lens on problem-solving: same instinct for clean structure, different tools.',
+			"I care about clean, minimal code, co-located concerns, and data-driven component architectures over hardcoded UI. I'd rather spend an extra hour designing a registry-based component than leave behind ten hardcoded conditionals for the next person to untangle."
 		],
+		image: {
+			src: '/images/about-photo.jpg',
+			alt: 'Kaviyarasan C at work',
+			position: 'left',
+			shape: 'rounded',
+			frame: 'bordered'
+		},
 		highlights: [
 			{ title: 'Experience', value: '2+ years' },
 			{ title: 'Location', value: 'Salem, Tamil Nadu, India' },
 			{ title: 'Education', value: 'B.Sc Computer Science, Periyar University' },
-			{ title: 'Focus', value: 'Svelte · Node.js · GraphQL' }
+			{ title: 'Current Role', value: 'Web Developer, Sharp Abacus' },
+			{ title: 'Focus', value: 'Svelte · Node.js · GraphQL' },
+			{ title: 'Also Skilled In', value: 'Power Platform · Azure' }
 		]
 	},
-
 	// ─────────────────────────────────────────────
 	// 3. JOURNEY (career timeline)
 	// ─────────────────────────────────────────────
@@ -76,15 +85,23 @@ export const heroPageSections = [
 		layout: 'journey',
 		title: 'My Journey',
 		subtitle: "Where I've worked and what I built",
+		description:
+			"Two years of shipping real product features, plus a stint in enterprise low-code automation — here's the path so far.",
+		highlights: [
+			{ title: 'Total Experience', value: '2+ years' },
+			{ title: 'Roles Held', value: '3' },
+			{ title: 'Companies', value: 'Sharp Abacus · Genpact' }
+		],
 		categories: [
 			{
 				title: 'Web Developer — Sharp Abacus (Remote, Bangalore)',
 				description: 'Jul 2024 – Jun 2026',
 				items: [
 					'Developed and optimized front-end features using Svelte, JavaScript, and Tailwind CSS, improving page load performance and UX',
-					'Built reusable UI components, reducing development time for new features',
+					'Built reusable UI components, reducing development time for new features across the learning platform',
 					'Designed and integrated GraphQL APIs using Node.js and MongoDB for efficient data handling',
-					'Updated data models, wrote migration scripts, and created API endpoints'
+					'Updated data models, wrote migration scripts, and created API endpoints for evolving product requirements',
+					'Converted an internship-track role into a full-time position after delivering on the EdTech platform'
 				]
 			},
 			{
@@ -104,7 +121,16 @@ export const heroPageSections = [
 					'Developed responsive UI features using HTML, CSS, JavaScript, Tailwind CSS, and Svelte',
 					'Fixed UI bugs and improved application usability and performance',
 					'Used Git and GitHub for version control and collaboration',
-					'Debugged and tested applications using Chrome DevTools'
+					'Debugged and tested applications using Chrome DevTools',
+					'First hands-on experience with Svelte, which became the primary stack for later roles'
+				]
+			},
+			{
+				title: 'B.Sc Computer Science — Periyar University, Salem',
+				description: '2019 – 2022 · CGPA 7.46/10.0',
+				items: [
+					'Built the foundation in programming, data structures, and web fundamentals that led into web development',
+					'Completed prior studies at Arignar Anna Govt Arts College, Attur'
 				]
 			}
 		]
@@ -118,20 +144,23 @@ export const heroPageSections = [
 		layout: 'techStack',
 		title: 'Tech Stack',
 		subtitle: 'Tools I build with',
+		description:
+			"A front-end-leaning full-stack toolkit, plus a parallel track in Microsoft's low-code ecosystem for business automation work.",
+		highlights: [
+			{ title: 'Primary Stack', value: 'Svelte · Node.js · GraphQL' },
+			{ title: 'Years with Svelte', value: '2+' },
+			{ title: 'Categories', value: '4' }
+		],
 		categories: [
 			{
-				title: 'Web Technologies',
-				description: 'Core front-end and back-end stack',
-				items: [
-					'JavaScript',
-					'HTML',
-					'CSS',
-					'Svelte',
-					'Tailwind CSS',
-					'Node.js',
-					'GraphQL',
-					'MongoDB'
-				]
+				title: 'Frontend & UI',
+				description: 'What I use to build interfaces',
+				items: ['JavaScript', 'HTML', 'CSS', 'Svelte', 'SvelteKit', 'Tailwind CSS']
+			},
+			{
+				title: 'Backend & Data',
+				description: 'APIs and data handling',
+				items: ['Node.js', 'GraphQL', 'MongoDB', 'REST APIs']
 			},
 			{
 				title: 'Microsoft Power Platform',
@@ -183,26 +212,43 @@ export const heroPageSections = [
 		layout: 'problemSolving',
 		title: 'Problem Solving',
 		subtitle: 'How I approach a new feature or bug',
-		approach: [
+		description:
+			"Whether it's a GraphQL schema change, a flaky UI bug, or a broken Power Automate flow, I work through the same loop every time.",
+		steps: [
 			{
-				title: 'Understand the root cause',
+				title: '1. Understand the root cause',
 				description:
-					'Before touching code, get a clear picture of why something behaves the way it does — not just the symptom.'
+					'Before touching code, get a clear picture of why something behaves the way it does — not just the symptom. On the EdTech platform, this often meant tracing a UI glitch back to a data model change rather than patching the component.'
 			},
 			{
-				title: 'Design for reuse',
-				description: 'Look for the reusable component or utility hiding inside a one-off request.'
+				title: '2. Reproduce and isolate',
+				description:
+					'Narrow the problem down to the smallest reliable repro — using Chrome DevTools for front-end issues, or isolating a single flow step when debugging Power Automate automations.'
 			},
 			{
-				title: 'Validate with real data',
+				title: '3. Design for reuse',
 				description:
-					'Test against real-world inputs — course data, student records, automation triggers — not just happy-path cases.'
+					'Look for the reusable component, utility, or registry entry hiding inside a one-off request, so the fix helps the next feature too, not just this one.'
 			},
 			{
-				title: 'Iterate with the team',
+				title: '4. Validate with real data',
 				description:
-					'Share progress early, especially on cross-functional Power Platform projects where requirements shift.'
+					'Test against real-world inputs — course data, student records, invoice documents, automation triggers — not just happy-path cases.'
+			},
+			{
+				title: '5. Iterate with the team',
+				description:
+					'Share progress early and adjust, especially on cross-functional Power Platform projects where business requirements shifted mid-build.'
+			},
+			{
+				title: '6. Ship, then measure',
+				description:
+					'Push the fix or feature, then watch real usage — page load performance, error rates, or process completion time — to confirm it actually solved the problem.'
 			}
+		],
+		highlights: [
+			{ title: 'Debugging Tools', value: 'Chrome DevTools · Git' },
+			{ title: 'Approach', value: 'Root cause → repro → fix → validate' }
 		]
 	},
 
@@ -214,24 +260,34 @@ export const heroPageSections = [
 		layout: 'learning',
 		title: 'Currently Learning',
 		subtitle: "Skills I'm actively building",
-		learningAreas: [
+		description:
+			"I treat learning as an ongoing part of the job, not a phase before it — here's what's on my bench right now, and where it's headed next.",
+		cards: [
 			{
 				title: 'Advanced Svelte 5',
-				description: 'Runes, shared stores, and data-driven component registries'
+				description:
+					'Runes, shared stores, and data-driven component registries — replacing hardcoded conditionals with configuration-driven UI.'
 			},
 			{
 				title: 'Backend architecture',
-				description: 'GraphQL API design patterns and MongoDB data modeling at scale'
+				description:
+					'GraphQL API design patterns and MongoDB data modeling at scale, beyond single-endpoint CRUD.'
 			},
 			{
 				title: 'System design',
-				description: 'Structuring larger applications for maintainability and performance'
+				description:
+					"Structuring larger applications for maintainability and performance as the EdTech platform's feature set grows."
+			},
+			{
+				title: 'Azure-integrated automation',
+				description:
+					'Connecting Power Platform flows more deeply with Microsoft Azure services for enterprise-grade automation.'
 			}
 		],
-		currentFocus: [
-			'Refining a data-driven content architecture for this portfolio site',
-			'Deepening GraphQL + Node.js backend skills',
-			'Exploring Azure-integrated Power Platform automation patterns'
+		highlights: [
+			{ title: 'Right Now', value: 'Data-driven portfolio architecture' },
+			{ title: 'Also Deepening', value: 'GraphQL · Node.js' },
+			{ title: 'Exploring', value: 'Azure + Power Platform automation' }
 		]
 	},
 
@@ -243,6 +299,13 @@ export const heroPageSections = [
 		layout: 'projects',
 		title: 'Projects',
 		subtitle: 'Selected work',
+		description:
+			"A mix of a live product I've worked on for two years, and four Power Platform automations built to replace manual business processes.",
+		highlights: [
+			{ title: 'Featured Project', value: 'Sharp Abacus Learning Platform' },
+			{ title: 'Domains', value: 'EdTech · Enterprise Automation' },
+			{ title: 'Total Projects', value: '5' }
+		],
 		categories: [
 			{
 				title: 'Sharp Abacus Learning Platform',
@@ -251,8 +314,10 @@ export const heroPageSections = [
 				items: [
 					'Built learning modules including Vedic Maths, Junior Abacus, and Global Competition features for student engagement',
 					'Built reusable, responsive UI components with Svelte.js and Tailwind CSS for performance and maintainability',
+					'Designed and integrated GraphQL APIs with Node.js and MongoDB for efficient data handling behind every module',
 					'Implemented video upload, playback, rating system, and leaderboard for performance tracking',
-					'Integrated screen recording, screenshot capture, and custom input systems for interactivity'
+					'Integrated screen recording, screenshot capture, and custom input systems for interactivity',
+					'Ongoing project — actively developed and extended since July 2023 across both internship and full-time roles'
 				]
 			},
 			{
@@ -261,7 +326,8 @@ export const heroPageSections = [
 					'Enterprise / AI Automation — Microsoft Copilot Studio, Power Automate, Dataverse',
 				items: [
 					'Built an AI-powered chatbot for conversational, document-upload, and query-based knowledge search',
-					'Implemented custom suggestion flows with selectable options and image-based prompts for quick navigation'
+					'Implemented custom suggestion flows with selectable options and image-based prompts for quick navigation',
+					'Connected the bot to Dataverse so answers pulled from real, structured knowledge data rather than static scripts'
 				]
 			},
 			{
@@ -269,7 +335,8 @@ export const heroPageSections = [
 				description: 'Business Process Automation — Power Automate, OneDrive, Dataverse',
 				items: [
 					'Built an automated pipeline: files uploaded to OneDrive were processed, data extracted, and stored in Dataverse',
-					'Implemented success/failure tracking for reliable document processing'
+					'Implemented success/failure tracking for reliable document processing',
+					'Removed a manual data-entry step from the invoice workflow, cutting processing time and human error'
 				]
 			},
 			{
@@ -277,7 +344,8 @@ export const heroPageSections = [
 				description: 'Enterprise / Workflow Management — Power Apps, Power Automate, OneDrive',
 				items: [
 					'Built a helpdesk system managing real-time emails and meetings with reply, flag, read/unread, and delete features',
-					'Streamlined communication workflows and improved operational efficiency'
+					'Streamlined communication workflows and improved operational efficiency',
+					'Gave the AP team a single interface for triaging inbound requests instead of juggling raw inbox and calendar views'
 				]
 			},
 			{
@@ -286,7 +354,8 @@ export const heroPageSections = [
 					'AI Automation / Enterprise Tools — Power Apps, Power Automate, Dataverse, Azure',
 				items: [
 					'Built an AI system that extracts intent, requirements, emotion, and flags from incoming emails',
-					'Integrated database retrieval to generate structured email outputs (subject, title, body) with review/edit before sending'
+					'Integrated database retrieval to generate structured email outputs (subject, title, body) with review/edit before sending',
+					'Kept a human review step in the loop, so automation sped up drafting without removing final approval'
 				]
 			}
 		]
@@ -295,28 +364,32 @@ export const heroPageSections = [
 	// ─────────────────────────────────────────────
 	// 9. CONNECT
 	// ─────────────────────────────────────────────
-	{
-		id: 'connect',
-		layout: 'connect',
-		title: "Let's Connect",
-		subtitle: 'Open to new opportunities and collaborations',
-		contactMethods: [
-			{ title: 'Email', value: 'cmkkaviyarasanmm@gmail.com', icon: 'mail' },
-			{ title: 'Location', value: 'Salem, Tamil Nadu, India', icon: 'location' }
-		],
-		links: [
-			{ label: 'GitHub', icon: 'github', href: 'https://github.com/YOUR-USERNAME' }, // TODO: replace with actual profile URL
-			{ label: 'LinkedIn', icon: 'linkedin', href: 'https://linkedin.com/in/YOUR-PROFILE' } // TODO: replace with actual profile URL
-		],
-		buttons: [
-			{
-				label: 'Send an Email',
-				type: 'external',
-				href: 'mailto:cmkkaviyarasanmm@gmail.com',
-				variant: 'primary'
-			}
-		]
-	}
+  {
+    id: "connect",
+    layout: "connect",
+    title: "Let's Connect",
+    subtitle: "Open to new opportunities and collaborations",
+    description:
+      "I'm open to full-time roles, freelance work, and collaborations involving Svelte, Node.js, or Power Platform automation. Reach out — I usually reply within a day or two.",
+    contactMethods: [
+      { title: "Email", value: "cmkkaviyarasanmm@gmail.com", icon: "mail" },
+      { title: "Phone", value: "+91 8124212240" },
+      { title: "Location", value: "Salem, Tamil Nadu, India", icon: "location" }
+    ],
+    highlights: [
+      { title: "Status", value: "Open to opportunities" },
+      { title: "Response Time", value: "Within 1–2 days" },
+      { title: "Interested In", value: "Full-time · Freelance · Collaboration" }
+    ],
+    links: [
+      { label: "GitHub", icon: "github", href: "https://github.com/YOUR-USERNAME" }, // TODO: replace with actual profile URL
+      { label: "LinkedIn", icon: "linkedin", href: "https://linkedin.com/in/YOUR-PROFILE" } // TODO: replace with actual profile URL
+    ],
+    buttons: [
+      { label: "Send an Email", type: "external", href: "mailto:cmkkaviyarasanmm@gmail.com", variant: "primary" },
+      { label: "Download Resume", type: "download", href: "/resume-kaviyarasan.pdf", variant: "secondary" }
+    ]
+  }
 ];
 
 export default heroPageSections;
