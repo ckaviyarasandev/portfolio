@@ -1,3 +1,5 @@
+import { heroPageColors } from "../themes/styles";
+
 const RADIAL_ORIGINS = [
 	'circle at center',
 	'circle at top left',
@@ -44,3 +46,9 @@ export function getNextPalette(palettes, currentName) {
 	const options = palettes.filter((p) => p.colorName !== currentName);
 	return options[Math.floor(Math.random() * options.length)];
 }
+
+export function randemBackground() {
+		if (!heroPageColors?.length) return null;
+		const randomIndex = Math.floor(Math.random() * heroPageColors.length);
+		return generateGradient(heroPageColors[randomIndex]);
+	}

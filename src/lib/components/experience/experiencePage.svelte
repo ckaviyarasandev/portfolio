@@ -8,18 +8,8 @@
 	import ExperienceCard from './experienceCard.svelte';
 	import ExperienceSummary from './experienceSummary.svelte';
 
-	/**
-	 * ExperiencePage owns its own background gradient, same pattern as
-	 * hero.svelte: it reports changes upward via onBackgroundChange and
-	 * pageController just applies whatever it's given. The gradient
-	 * shifts as the user scrolls past each experience card, using an
-	 * IntersectionObserver per card rather than scroll-position math.
-	 */
 	let { onBackgroundChange, onNavigate } = $props();
 
-	// One color per role theme — swap these for your actual palette,
-	// or pull from heroPageColors if you want the two pages to share
-	// a single source of truth for color values.
 	const themeColors = {
 		amber: { hue: 38, colorName: 'amber' },
 		sky: { hue: 199, colorName: 'sky' },
@@ -34,7 +24,6 @@
 	}
 
 	onMount(() => {
-		// Fire once immediately so the background isn't blank before scroll.
 		reportGradient(experience[0]?.theme);
 
 		const observer = new IntersectionObserver(

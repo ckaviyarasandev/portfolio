@@ -18,9 +18,7 @@ export const allDetails = [
 		title: 'Kaviyarasan C',
 		subtitle: 'Web Developer — Svelte · Node.js · GraphQL',
 		description: [
-			'I build scalable, user-friendly web applications end-to-end — from responsive Svelte front ends to the GraphQL APIs and MongoDB data models behind them. ',
-			"Based in Salem, Tamil Nadu, I've spent the last two years shipping features for a live EdTech learning platform, alongside a stint building low-code automation tools on Microsoft Power Platform.",
-			'I care about clean, minimal code and data-driven component architecture — building things that are easy to extend, not just easy to ship once.'
+			"I'm a Web Developer with 2+ years of experience building scalable, user-friendly web applications using Svelte, JavaScript, Node.js, GraphQL, and MongoDB. I enjoy creating clean, reusable, and maintainable solutions by following modern development practices and component-driven architecture. "
 		],
 		image: {
 			src: '/images/profile_transparent.png',
