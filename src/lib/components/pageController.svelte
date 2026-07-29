@@ -23,7 +23,12 @@
 
 	let { page } = $props();
 
-	let currentGradient = $state(generateGradient(pagePalettes[navbarLinks.home.page]));
+	// Generated once and reused as Hero's own initial gradient (via the initialGradient
+	// prop below) instead of letting Hero call generateGradient() again independently —
+	// that would produce a different random string for the same palette and read as a
+	// real background change, firing an unwanted slide right after the page loads.
+	const initialGradient = generateGradient(pagePalettes[navbarLinks.home.page]);
+	let currentGradient = $state(initialGradient);
 
 	let isKnownPage = $derived(Object.values(navbarLinks).some((link) => link.page === page));
 	let isNotFound = $derived(!isKnownPage);
@@ -46,7 +51,10 @@
 
 	// The background layer that's actually painted right now, kept one step behind
 	// activeBackground so the new value can slide in over it (same previous/current
-	// pairing slideShow.svelte uses for its own slide-in/out).
+	// pairing slideShow.svelte uses for its own slide-in/out). Seeded straight from
+	// activeBackground — the real, correct color for whichever page loads first — so
+	// there's no placeholder-to-real color swap; it just sits still while the content
+	// (held back in hero.svelte's own lead pause) slides in on top of it.
 	let displayedBackground = $state(activeBackground);
 	let previousBackground = $state(null);
 	let bgTransitionId = $state(0);
@@ -115,13 +123,17 @@
 	{/if}
 	{#key bgTransitionId}
 		<div
-			class="bg-slide-enter absolute inset-0 {slideDirection === -1 ? 'bg-slide-in-left' : 'bg-slide-in-right'}"
+			class="absolute inset-0 {bgTransitionId > 0
+				? `bg-slide-enter ${slideDirection === -1 ? 'bg-slide-in-left' : 'bg-slide-in-right'}`
+				: ''}"
 			style:background-image={displayedBackground ?? 'none'}
 			style="--bg-duration: {bgDurationMs}ms;"
 			aria-hidden="true"
 		>
-			<span class="glitter-cursor" aria-hidden="true"></span>
-			<span class="glitter-burst" aria-hidden="true"></span>
+			{#if bgTransitionId > 0}
+				<span class="glitter-cursor" aria-hidden="true"></span>
+				<span class="glitter-burst" aria-hidden="true"></span>
+			{/if}
 		</div>
 	{/key}
 
@@ -141,6 +153,7 @@
 	{#if isHome}
 		<Hero
 			sections={allDetails}
+			{initialGradient}
 			onBackgroundChange={(gradient) => (currentGradient = gradient)}
 			onSlideStateChange={handleSlideStateChange}
 		/>

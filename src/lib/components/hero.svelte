@@ -6,7 +6,7 @@
 	import { generateGradient, getNextPalette } from '../../utils/gradientGenerator';
 	import { setActivePalette } from '../state/activePalette.svelte.js';
 
-	let { sections = [], onBackgroundChange, onSlideStateChange } = $props();
+	let { sections = [], onBackgroundChange, onSlideStateChange, initialGradient } = $props();
 
 	let currentIndex = $state(0);
 	let previousIndex = $state(null);
@@ -14,7 +14,12 @@
 	let transitionId = $state(0);
 
 	let currentPalette = $state(heroPageColors[0]);
-	let currentGradient = $state(generateGradient(heroPageColors[0]));
+	// generateGradient() shuffles colors/stops/angle randomly on every call, so calling it
+	// again here (even for the same first palette) produces a different string than
+	// pageController already generated for its own initial background — which then reads
+	// as a real color change and fires an unwanted second slide right after load. Reusing
+	// pageController's initialGradient keeps the two in sync from the very first paint.
+	let currentGradient = $state(initialGradient ?? generateGradient(heroPageColors[0]));
 	let isAnimating = $state(false);
 
 	let timer;

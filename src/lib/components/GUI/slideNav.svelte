@@ -1,6 +1,7 @@
 <script module>
-	export const INTERVAL = 30000;
+	export const INTERVAL = 10000;
 	export const TRANSITION_MS = 800;
+	export const INITIAL_LEAD_MS = 1000;
 
 	/** @type {{ SLIDING: 'sliding', VIEW: 'view', PAUSED: 'paused' }} */
 	export const SLIDE_STATUS = {

@@ -1,8 +1,8 @@
 export const notFoundPalette = {
 	colorName: 'Error Red',
-	light: '#FCA5A5',
-	mid: '#DC2626',
-	dark: '#7F1D1D'
+	primary: '#DC2626',
+	secondary: '#7F1D1D',
+	accent: '#FCA5A5'
 };
 
 export const heroPageColors = [
