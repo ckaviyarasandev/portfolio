@@ -9,9 +9,7 @@
 	import { generateGradient } from '../../utils/gradientGenerator';
 	import { setActivePalette } from '../state/activePalette.svelte.js';
 	import { SLIDE_STATUS, TRANSITION_MS as DEFAULT_TRANSITION_MS } from './GUI/slideNav.svelte';
-	import ExperiencePage from './experience/experiencePage.svelte';
-	import SkillsPage from './skills/skillsPage.svelte';
-	import ContactPage from './contact/contactPage.svelte';
+	import ResumePage from './resume/resumePage.svelte';
 
 	const notFoundGradient = generateGradient(notFoundPalette);
 	const pagePalettes = Object.fromEntries(
@@ -33,9 +31,7 @@
 	let isKnownPage = $derived(Object.values(navbarLinks).some((link) => link.page === page));
 	let isNotFound = $derived(!isKnownPage);
 	let isHome = $derived(!isNotFound && page === navbarLinks.home.page);
-	let experiencePage = $derived(page === navbarLinks.experience.page);
-	let skillsPage = $derived(page === navbarLinks.skills.page);
-	let contactPage = $derived(page === navbarLinks.contact.page);
+	let resumePage = $derived(page === navbarLinks.resume.page);
 
 	let activeBackground = $derived(isKnownPage ? currentGradient : notFoundGradient);
 
@@ -68,7 +64,7 @@
 	});
 
 	$effect(() => {
-		if (isKnownPage && !isHome && !experiencePage) {
+		if (isKnownPage && !isHome) {
 			currentGradient = generateGradient(pagePalettes[page]);
 			setActivePalette(pagePalettes[page]);
 		}
@@ -157,15 +153,8 @@
 			onBackgroundChange={(gradient) => (currentGradient = gradient)}
 			onSlideStateChange={handleSlideStateChange}
 		/>
-	{:else if experiencePage}
-		<ExperiencePage
-			onBackgroundChange={(gradient) => (currentGradient = gradient)}
-			onNavigate={handleNavigate}
-		/>
-	{:else if skillsPage}
-		<SkillsPage onNavigate={handleNavigate} />
-	{:else if contactPage}
-		<ContactPage onNavigate={handleNavigate} />
+	{:else if resumePage}
+		<ResumePage onNavigate={handleNavigate} />
 	{:else if isNotFound}
 		<NotFound />
 	{/if}

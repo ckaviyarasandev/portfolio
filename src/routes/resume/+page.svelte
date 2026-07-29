@@ -3,4 +3,4 @@
 	import { navbarLinks } from '../../datas/content';
 </script>
 
-<PageController page={navbarLinks.contact.page} />
+<PageController page={navbarLinks.resume.page} />

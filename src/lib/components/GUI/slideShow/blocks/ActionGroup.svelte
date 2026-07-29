@@ -1,6 +1,7 @@
 <script>
 	import { ICONS } from '../../../../../datas/icon';
 	import { randemBackground } from '../../../../../utils/gradientGenerator';
+	import { toDriveDownloadUrl } from '../../../../../utils/driveLink.js';
 	import { BUTTON_VARIANTS, MOTION, cx, pick } from '../utils/style.js';
 
 	let { buttons = [], links = [], align = 'left' } = $props();
@@ -17,13 +18,18 @@
 		event.preventDefault();
 		document.querySelector(button.target)?.scrollIntoView({ behavior: 'smooth' });
 	}
+
+	function resolveHref(button) {
+		const href = button.href ?? button.target ?? '#';
+		return button.type === 'download' ? toDriveDownloadUrl(href) : href;
+	}
 </script>
 
 {#if buttons?.length}
 	<div class="mt-10 flex flex-wrap items-center gap-4 {justifyClass}">
 		{#each buttons as button, i}
 			<a
-				href={button.href ?? button.target ?? '#'}
+				href={resolveHref(button)}
 				download={button.type === 'download' ? '' : undefined}
 				onclick={(e) => handleButtonClick(button, e)}
 				class={cx(

@@ -1,3 +1,7 @@
+import { resumeFile } from './resume.js';
+
+export { resumeFile };
+
 export const pageTitles = [
 	'☕ Code • Coffee • Sleep',
 	'💻 Code • Create • Repeat',
@@ -37,7 +41,7 @@ export const allDetails = [
 			{
 				label: 'Download Resume',
 				type: 'download',
-				href: '/resume-kaviyarasan.pdf',
+				href: resumeFile.href,
 				variant: 'secondary'
 			},
 			{ label: 'Get in Touch', type: 'scroll', target: 'connect', variant: 'secondary' }
@@ -392,7 +396,7 @@ export const allDetails = [
 			{
 				label: 'Download Resume',
 				type: 'download',
-				href: '/resume-kaviyarasan.pdf',
+				href: resumeFile.href,
 				variant: 'secondary'
 			}
 		]
@@ -456,4 +460,5 @@ export const temp_allDetails = [
 
 export const navbarLinks = {
 	home: { name: 'Home', page: 'home' },
+	resume: { name: 'Resume', page: 'resume' },
 };
