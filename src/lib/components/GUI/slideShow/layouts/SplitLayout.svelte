@@ -12,14 +12,23 @@
 </script>
 
 <section
-	class="relative flex w-full p-4 flex-col items-center justify-center gap-8 overflow-hidden text-center md:flex-row md:justify-between md:text-left"
+	class="relative flex w-full flex-col items-center justify-center gap-8 overflow-hidden p-4 text-center md:flex-row md:justify-between md:text-left"
 >
-	<div class={cx('w-full flex flex-1 flex-col items-center md:items-start', imageOnLeft && 'md:order-2')}>
-		<SlideHeading tag={section.tag} title={section.title} subtitle={section.subtitle} quote={section.quote} />
+	<div
+		class={cx(
+			'flex w-full flex-1 flex-col items-center md:items-start',
+			imageOnLeft && 'md:order-2'
+		)}
+	>
+		<SlideHeading
+			tag={section.tag}
+			title={section.title}
+			subtitle={section.subtitle}
+			quote={section.quote}
+		/>
 		<SlideDescription description={section.description} />
-		<ActionGroup buttons={section.buttons} links={section.links} />
-		
 		<ContentBlocks {section} class="mt-4" />
+		<ActionGroup buttons={section.buttons} links={section.links} />
 	</div>
 
 	<SlideMedia image={section.image} {palette} class={imageOnLeft ? 'md:order-1' : ''} />

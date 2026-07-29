@@ -7,7 +7,7 @@
 	let { section } = $props();
 </script>
 
-<section class="relative flex w-full p-4 flex-col items-center gap-8 overflow-hidden text-center">
+<section class="relative flex w-full flex-col items-center gap-8 overflow-hidden p-4 text-center">
 	<SlideHeading
 		tag={section.tag}
 		title={section.title}
@@ -16,8 +16,8 @@
 		align="center"
 	/>
 	<SlideDescription description={section.description} align="center" />
-	<ActionGroup buttons={section.buttons} links={section.links} align="center" />
 	<div class="mt-4 w-full max-w-5xl">
 		<ContentBlocks {section} class="items-center" />
 	</div>
+	<ActionGroup buttons={section.buttons} links={section.links} align="center" />
 </section>

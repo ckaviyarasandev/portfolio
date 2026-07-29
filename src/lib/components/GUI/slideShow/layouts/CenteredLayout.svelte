@@ -20,6 +20,6 @@
 		align="center"
 	/>
 	<SlideDescription description={section.description} align="center" />
-	<ActionGroup buttons={section.buttons} links={section.links} align="center" />
 	<ContentBlocks {section} class="items-center" />
+	<ActionGroup buttons={section.buttons} links={section.links} align="center" />
 </section>
