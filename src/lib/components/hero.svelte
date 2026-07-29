@@ -27,6 +27,8 @@
 	let containerEl;
 
 	let wheelLocked = false;
+	let boundaryArmed = false;
+	let boundaryDirection = 0;
 	const WHEEL_THRESHOLD = 12;
 
 	$effect(() => {
@@ -49,6 +51,8 @@
 		transitionId += 1;
 		currentPalette = getNextPalette(heroPageColors, currentPalette.colorName);
 		currentGradient = generateGradient(currentPalette);
+		boundaryArmed = false;
+		boundaryDirection = 0;
 		resetTimer();
 		unlockAfterTransition();
 	}
@@ -98,23 +102,46 @@
 		}
 	}
 
+	function getActiveScrollEl() {
+		const activeSlide = containerEl?.querySelector('.glass-scroll[aria-hidden="false"]');
+		if (!activeSlide) return null;
+		return activeSlide.querySelector('#contentSection') ?? activeSlide;
+	}
+
 	function handleWheel(e) {
 		if (Math.abs(e.deltaY) < WHEEL_THRESHOLD) return;
 
-		const activeEl = containerEl?.querySelector('.glass-scroll[aria-hidden="false"]');
+		const dir = e.deltaY > 0 ? 1 : -1;
+		const activeEl = getActiveScrollEl();
+
 		if (activeEl) {
 			const atTop = activeEl.scrollTop <= 0;
 			const atBottom = activeEl.scrollTop + activeEl.clientHeight >= activeEl.scrollHeight - 1;
-			if (e.deltaY > 0 && !atBottom) return;
-			if (e.deltaY < 0 && !atTop) return;
+			const atEdge = (dir === 1 && atBottom) || (dir === -1 && atTop);
+
+			if (!atEdge) {
+				// still room to scroll in this direction — let it scroll and reset the arm
+				boundaryArmed = false;
+				boundaryDirection = 0;
+				return;
+			}
+
+			if (!boundaryArmed || boundaryDirection !== dir) {
+				// first wheel tick that lands on the edge — consume it, don't navigate yet
+				boundaryArmed = true;
+				boundaryDirection = dir;
+				return;
+			}
 		}
 
 		if (wheelLocked || isAnimating) return;
 		e.preventDefault();
 		wheelLocked = true;
+		boundaryArmed = false;
+		boundaryDirection = 0;
 		setTimeout(() => (wheelLocked = false), TRANSITION_MS + 200);
 
-		e.deltaY > 0 ? nextSlide() : prevSlide();
+		dir === 1 ? nextSlide() : prevSlide();
 	}
 
 	function handleTouchStart(e) {
@@ -146,7 +173,7 @@
 <svelte:window onkeydown={handleKeydown} />
 <div
 	bind:this={containerEl}
-	class="relative z-10 mx-auto w-full"
+	class="relative z-10 w-full"
 	role="region"
 	onmouseenter={handlePause}
 	onmouseleave={handleResume}
@@ -155,7 +182,7 @@
 	onwheel={handleWheel}
 >
 	<div
-		class="relative w-full overflow-hidden h-[calc(100dvh)] px-4"
+		class="relative w-full overflow-hidden h-[calc(100dvh)]"
 		style="--slide-duration: {TRANSITION_MS}ms;"
 	>
 		{#each sections as section, i (section.id)}

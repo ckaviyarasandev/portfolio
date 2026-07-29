@@ -15,8 +15,9 @@
 	class="relative flex w-full flex-col items-center justify-center gap-8 overflow-hidden p-4 text-center md:flex-row md:justify-between md:text-left"
 >
 	<div
+		id="contentSection"
 		class={cx(
-			'flex w-full flex-1 flex-col items-center md:items-start',
+			'glass-scroll flex w-full flex-1 flex-col items-center gap-2 self-center overflow-y-auto max-h-[80dvh] md:items-start',
 			imageOnLeft && 'md:order-2'
 		)}
 	>
