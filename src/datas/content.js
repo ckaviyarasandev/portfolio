@@ -19,10 +19,12 @@ export const allDetails = [
 	{
 		id: 'hero',
 		layout: 'hero',
+		buttonsUnderMedia: true,
 		title: 'Kaviyarasan C',
 		subtitle: 'Web Developer — Svelte · Node.js · GraphQL',
 		description: [
-			"I'm a Web Developer with 2+ years of experience building scalable, user-friendly web applications using Svelte, JavaScript, Node.js, GraphQL, and MongoDB. I enjoy creating clean, reusable, and maintainable solutions by following modern development practices and component-driven architecture. "
+			'Web Developer with 2+ years building production web apps end to end — Svelte and Tailwind CSS on the front, Node.js, GraphQL and MongoDB behind them. I design GraphQL schemas, evolve MongoDB data models with the migrations to match, and build reusable, data-driven components instead of one-off screens: less duplicated markup, faster features, and fewer hardcoded conditionals for the next person.',
+			'Currently shipping an EdTech learning platform used across multiple course tracks — Vedic Maths and Junior Abacus modules, video playback, ratings and leaderboards. Also fluent in the Microsoft Power Platform — Power Apps, Power Automate and Copilot Studio — from automating real business workflows at Genpact.'
 		],
 		image: {
 			src: ['/images/profile_transparent.png', '/images/kaviyarasan_hi.png'],

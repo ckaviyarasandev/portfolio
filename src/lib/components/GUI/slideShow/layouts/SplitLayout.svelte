@@ -9,6 +9,10 @@
 	let { section, palette } = $props();
 
 	const imageOnLeft = $derived(section.image?.position === 'left');
+	// Per-section escape hatch: most slides keep their buttons at the end of the
+	// content column, but the hero wants them anchored under its portrait instead —
+	// data-driven via content.js rather than hardcoding a check against section.id.
+	const buttonsUnderMedia = $derived(!!section.buttonsUnderMedia);
 </script>
 
 <!--
@@ -22,11 +26,18 @@
 <section
 	class="relative flex w-full flex-col items-center justify-center gap-6 overflow-hidden text-center px-4 md:px-6 lg:px-10  sm:gap-8 md:flex-row md:justify-between md:text-left"
 >
-	<SlideMedia
-		image={section.image}
-		{palette}
-		class={cx('shrink-0', imageOnLeft && 'md:order-1', !imageOnLeft && 'md:order-2')}
-	/>
+	<div
+		class={cx(
+			'flex shrink-0 flex-col items-center gap-6',
+			imageOnLeft && 'md:order-1',
+			!imageOnLeft && 'md:order-2'
+		)}
+	>
+		<SlideMedia image={section.image} {palette} />
+		{#if buttonsUnderMedia}
+			<ActionGroup buttons={section.buttons} align="center" />
+		{/if}
+	</div>
 
 	<div
 		id="contentSection"
@@ -44,6 +55,6 @@
 		/>
 		<ContentBlocks {section} class="mt-4" />
 		<SlideDescription description={section.description} />
-		<ActionGroup buttons={section.buttons} links={section.links} />
+		<ActionGroup buttons={buttonsUnderMedia ? [] : section.buttons} links={section.links} />
 	</div>
 </section>
