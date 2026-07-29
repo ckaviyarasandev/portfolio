@@ -75,11 +75,11 @@
 	}
 
 	onMount(() => {
-		const finePointer = window.matchMedia('(pointer: fine)').matches;
 		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-		// Only trail behind an actual mouse/trackpad — touch input has no hover cursor,
-		// and reduced-motion users don't want sparkles chasing every move.
-		enabled = finePointer && !reducedMotion;
+		// Pointer events cover mouse, trackpad, pen AND touch, so this now trails behind
+		// a finger dragging across the screen too (and the click burst fires on tap).
+		// Only reduced-motion users opt out.
+		enabled = !reducedMotion;
 		if (!enabled) return;
 
 		window.addEventListener('pointermove', handlePointerMove, { passive: true });

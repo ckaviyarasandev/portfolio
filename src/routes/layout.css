@@ -1,3 +1,12 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+/* Defensive last line against any accidental horizontal overflow (e.g. a fixed-position
+   element that isn't clipped by an ancestor's overflow-hidden). Doesn't fix root causes
+   on its own, but guarantees no page-level horizontal scrollbar/shift on mobile. */
+html,
+body {
+	overflow-x: hidden;
+	max-width: 100%;
+}

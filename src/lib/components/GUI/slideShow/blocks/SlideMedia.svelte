@@ -29,7 +29,11 @@
 </script>
 
 {#if image?.src}
-	<div class={cx('flex flex-1 justify-center max-w-max', className)}>
+	<!-- No flex-1/growing here: this is a fixed-size avatar-style image, not a
+	     flexible column. Letting it grow used to fight the text column for width
+	     once both sit in a row on mobile; sizing/shrink behavior is the parent
+	     layout's job (see SplitLayout's `shrink-0`). -->
+	<div class={cx('flex justify-center max-w-max', className)}>
 		{#if isBackground}
 			<div class="relative">
 				<div

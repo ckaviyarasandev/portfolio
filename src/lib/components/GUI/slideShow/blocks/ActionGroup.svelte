@@ -27,7 +27,7 @@
 				download={button.type === 'download' ? '' : undefined}
 				onclick={(e) => handleButtonClick(button, e)}
 				class={cx(
-					'group relative isolate overflow-hidden rounded-full px-7 py-3.5',
+					'group relative isolate max-w-full overflow-hidden break-words rounded-full px-7 py-3.5',
 					'text-shadow-sm text-sm font-semibold tracking-wide text-white sm:text-base',
 					'border border-white/20 shadow-lg shadow-black/20 backdrop-blur-xl',
 					'transition-all duration-300 ease-out',

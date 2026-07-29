@@ -16,16 +16,16 @@
 	}
 </script>
 
-<header class="fixed top-0 right-0 max-w-max z-40 mr-12">
+<header class="fixed top-0 right-0 z-40 mr-4 max-w-[calc(100vw-2rem)] sm:mr-8 md:mr-12">
 	<nav
-		class="flex gap-6 max-w-max items-center justify-between rounded-b-4xl border border-t-0 px-10 py-2 shadow backdrop-blur-md transition-colors duration-500 motion-reduce:transition-none border-white/10 bg-white/5"
+		class="flex max-w-full items-center justify-between gap-3 rounded-b-4xl border border-t-0 px-4 py-2 shadow backdrop-blur-md transition-colors duration-500 motion-reduce:transition-none border-white/10 bg-white/5 sm:gap-6 sm:px-10"
 	>
 		<button
 			type="button"
 			onclick={() => go(navbarLinks.home.page)}
-			class="group flex select-none items-baseline gap-2 rounded-4xl outline-none focus-visible:ring-2 focus-visible:ring-current"
+			class="group flex min-w-0 select-none items-baseline gap-2 rounded-4xl outline-none focus-visible:ring-2 focus-visible:ring-current"
 		>
-			<h1 class="text-lg font-semibold tracking-tight transition-colors duration-300 text-white group-hover:text-white/80">
+			<h1 class="truncate text-lg font-semibold tracking-tight transition-colors duration-300 text-white group-hover:text-white/80">
 				{aboutMe.name}
 			</h1>
 			<span class="hidden sm:inline ml-4 text-white/40">

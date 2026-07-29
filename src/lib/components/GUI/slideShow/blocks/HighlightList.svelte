@@ -11,7 +11,7 @@
 	<ul class="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
 		{#each items as highlight, i}
 			<li
-				class="relative isolate overflow-hidden rounded-full border border-white/20 px-4 py-1.5 text-sm backdrop-blur-xl transition-all duration-300 motion-safe:hover:border-white/40 motion-safe:hover:shadow-lg motion-safe:hover:shadow-black/20"
+				class="relative isolate max-w-full overflow-hidden break-words rounded-full border border-white/20 px-4 py-1.5 text-sm backdrop-blur-xl transition-all duration-300 motion-safe:hover:border-white/40 motion-safe:hover:shadow-lg motion-safe:hover:shadow-black/20"
 			>
 				<!-- dynamic gradient layer at 40% opacity -->
 				<span

@@ -14,10 +14,13 @@ export const IMAGE_FRAMES = {
 	background: 'border-0 bg-transparent'
 };
 
+// Mobile shows the image centered on its own row above the text (see SplitLayout.svelte),
+// so it doesn't need to share horizontal space with anything — sized a bit smaller than
+// desktop just so it doesn't dominate a small screen. md:/lg: sizes are unchanged.
 export const IMAGE_SIZES = {
-	small: 'h-48 w-48 md:h-56 md:w-56',
-	medium: 'h-64 w-64 md:h-72 md:w-72',
-	large: 'h-64 w-64 md:h-80 md:w-80'
+	small: 'h-32 w-32 sm:h-40 sm:w-40 md:h-56 md:w-56',
+	medium: 'h-36 w-36 sm:h-44 sm:w-44 md:h-72 md:w-72',
+	large: 'h-40 w-40 sm:h-48 sm:w-48 md:h-80 md:w-80'
 };
 
 export const BUTTON_VARIANTS = {

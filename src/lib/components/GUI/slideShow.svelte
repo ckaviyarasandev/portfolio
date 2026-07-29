@@ -23,8 +23,14 @@
 
 <ScrollbarStyles />
 
+<!-- overscroll-contain is scoped to md:+ on purpose: it stops the desktop wheel-driven
+     "scroll to the bottom, then advance slide" logic in hero.svelte from fighting the
+     browser's native scroll chaining. On mobile there's no such wheel logic (slides
+     change via swipe/buttons instead), and containing overscroll there just hard-stops
+     touch scrolling at this element's boundary instead of letting it chain to the page
+     — which is what was trapping/breaking scroll on mobile. -->
 <div
-	class="glass-scroll absolute inset-0 overflow-y-auto overscroll-contain {animationClass}"
+	class="glass-scroll absolute inset-0 overflow-y-auto md:overscroll-contain {animationClass}"
 	style="
 		pointer-events: {active ? 'auto' : 'none'};
 		z-index: {active ? 2 : status === 'parked' ? 0 : 1};

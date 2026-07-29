@@ -18,12 +18,17 @@
 	let isAnimating = $state(false);
 
 	let timer;
-	// Hovering pauses autoplay temporarily; the nav button pauses it until toggled back on.
-	// Kept separate so a mouse-leave doesn't silently cancel a manual pause.
-	let hoverPaused = $state(false);
+	// Autoplay only stops via the pause button now — hovering the slideshow no longer
+	// pauses it, so it keeps advancing even while the user's mouse is resting over it.
 	let manualPaused = $state(false);
-	let isPaused = $derived(hoverPaused || manualPaused);
+	let isPaused = $derived(manualPaused);
 	let prefersReducedMotion = $state(false);
+
+	// Bumped every time the autoplay countdown actually (re)starts from zero — on slide
+	// change and on resume-from-pause — so SlideNav knows when to restart its progress-fill
+	// animation instead of just pausing/resuming it (clearInterval+setInterval always
+	// restarts the full INTERVAL anyway, so the visual should always restart too).
+	let cycleId = $state(0);
 
 	let slideStatus = $derived(
 		isAnimating ? SLIDE_STATUS.SLIDING : isPaused ? SLIDE_STATUS.PAUSED : SLIDE_STATUS.VIEW
@@ -78,6 +83,7 @@
 		boundaryDirection = 0;
 		clearTimeout(wheelIdleTimer);
 		resetTimer();
+		cycleId += 1;
 		unlockAfterTransition();
 	}
 
@@ -100,20 +106,13 @@
 		startTimer();
 	}
 
-	function handlePause() {
-		hoverPaused = true;
-		stopTimer();
-	}
-	function handleResume() {
-		hoverPaused = false;
-		if (!manualPaused) startTimer();
-	}
 	function togglePause() {
 		manualPaused = !manualPaused;
 		if (manualPaused) {
 			stopTimer();
-		} else if (!hoverPaused) {
+		} else {
 			startTimer();
+			cycleId += 1;
 		}
 	}
 
@@ -219,8 +218,6 @@
 	bind:this={containerEl}
 	class="relative z-10 w-full"
 	role="region"
-	onmouseenter={handlePause}
-	onmouseleave={handleResume}
 	ontouchstart={handleTouchStart}
 	ontouchend={handleTouchEnd}
 	onwheel={handleWheel}
@@ -253,5 +250,6 @@
 		onNavigate={changeSlide}
 		{isPaused}
 		onTogglePause={togglePause}
+		{cycleId}
 	/>
 </div>
