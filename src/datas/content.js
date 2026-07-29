@@ -60,7 +60,7 @@ export const allDetails = [
 			"I care about clean, minimal code, co-located concerns, and data-driven component architectures over hardcoded UI. I'd rather spend an extra hour designing a registry-based component than leave behind ten hardcoded conditionals for the next person to untangle."
 		],
 		image: {
-			src: '/images/about-photo.jpg',
+			src: '/images/profile_office.png',
 			alt: 'Kaviyarasan C at work',
 			position: 'left',
 			shape: 'rounded',

@@ -1,11 +1,11 @@
 <script>
 	import { onMount } from 'svelte';
 	import SlideShow from './GUI/slideShow.svelte';
-	import SlideNav, { INTERVAL, TRANSITION_MS } from './GUI/slideNav.svelte';
+	import SlideNav, { INTERVAL, TRANSITION_MS, SLIDE_STATUS } from './GUI/slideNav.svelte';
 	import { heroPageColors } from '../../themes/styles.js';
 	import { generateGradient, getNextPalette } from '../../utils/gradientGenerator';
 
-	let { sections = [], onBackgroundChange } = $props();
+	let { sections = [], onBackgroundChange, onSlideStateChange } = $props();
 
 	let currentIndex = $state(0);
 	let previousIndex = $state(null);
@@ -17,8 +17,16 @@
 	let isAnimating = $state(false);
 
 	let timer;
-	let isPaused = $state(false);
+	// Hovering pauses autoplay temporarily; the nav button pauses it until toggled back on.
+	// Kept separate so a mouse-leave doesn't silently cancel a manual pause.
+	let hoverPaused = $state(false);
+	let manualPaused = $state(false);
+	let isPaused = $derived(hoverPaused || manualPaused);
 	let prefersReducedMotion = $state(false);
+
+	let slideStatus = $derived(
+		isAnimating ? SLIDE_STATUS.SLIDING : isPaused ? SLIDE_STATUS.PAUSED : SLIDE_STATUS.VIEW
+	);
 
 	let touchStartX = 0;
 	let touchStartY = 0;
@@ -35,6 +43,13 @@
 
 	$effect(() => {
 		onBackgroundChange?.(currentGradient);
+	});
+
+	$effect(() => {
+		// Report the current status plus how long/which way the parent should animate a
+		// "sliding" transition — sourced from slideNav's own TRANSITION_MS/direction, so
+		// pageController never has to hardcode/import those values itself.
+		onSlideStateChange?.({ status: slideStatus, durationMs: TRANSITION_MS, direction });
 	});
 
 	function unlockAfterTransition() {
@@ -80,12 +95,20 @@
 	}
 
 	function handlePause() {
-		isPaused = true;
+		hoverPaused = true;
 		stopTimer();
 	}
 	function handleResume() {
-		isPaused = false;
-		startTimer();
+		hoverPaused = false;
+		if (!manualPaused) startTimer();
+	}
+	function togglePause() {
+		manualPaused = !manualPaused;
+		if (manualPaused) {
+			stopTimer();
+		} else if (!hoverPaused) {
+			startTimer();
+		}
 	}
 
 	function isTypingTarget(e) {
@@ -217,5 +240,12 @@
 		{/each}
 	</div>
 
-	<SlideNav bind:this={slideNav} {sections} {currentIndex} onNavigate={changeSlide} />
+	<SlideNav
+		bind:this={slideNav}
+		{sections}
+		{currentIndex}
+		onNavigate={changeSlide}
+		{isPaused}
+		onTogglePause={togglePause}
+	/>
 </div>

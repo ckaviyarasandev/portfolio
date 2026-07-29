@@ -1,10 +1,17 @@
 <script module>
 	export const INTERVAL = 30000;
 	export const TRANSITION_MS = 800;
+
+	/** @type {{ SLIDING: 'sliding', VIEW: 'view', PAUSED: 'paused' }} */
+	export const SLIDE_STATUS = {
+		SLIDING: 'sliding',
+		VIEW: 'view',
+		PAUSED: 'paused'
+	};
 </script>
 
 <script>
-	let { sections = [], currentIndex = 0, onNavigate } = $props();
+	let { sections = [], currentIndex = 0, onNavigate, isPaused = false, onTogglePause } = $props();
 
 	function dispatchNavigate(index, direction) {
 		onNavigate?.(index, direction);
@@ -31,6 +38,25 @@
 </script>
 
 {#if sections.length > 1}
+	<button
+		type="button"
+		onclick={() => onTogglePause?.()}
+		aria-label={isPaused ? 'Resume slideshow' : 'Pause slideshow'}
+		aria-pressed={isPaused}
+		class="absolute top-4 left-4 z-50 rounded-full bg-white/10 p-2 text-white backdrop-blur transition hover:bg-white/20"
+	>
+		{#if isPaused}
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+				<polygon points="6 4 20 12 6 20" />
+			</svg>
+		{:else}
+			<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+				<rect x="6" y="4" width="4" height="16" rx="1" />
+				<rect x="14" y="4" width="4" height="16" rx="1" />
+			</svg>
+		{/if}
+	</button>
+
 	<button
 		type="button"
 		onclick={prevSlide}

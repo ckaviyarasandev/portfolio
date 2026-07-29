@@ -26,11 +26,6 @@
 	const secondary = $derived(activePalette?.secondary ?? '#172554');
 	const accent = $derived(activePalette?.accent ?? primary);
 	const glowColor = $derived(accent);
-
-	// Rotating conic-gradient border sourced from the palette, used for the spin ring.
-	const spinGradient = $derived(
-		`conic-gradient(from 0deg, ${primary}, ${accent}, ${secondary}, ${primary})`
-	);
 </script>
 
 {#if image?.src}
@@ -45,8 +40,10 @@
 				<div class="spin-wrap relative p-[3px]" style:border-radius={radius}>
 					<div
 						class="spin-ring absolute inset-0"
-						style:background={spinGradient}
 						style:border-radius={radius}
+						style:--ring-primary={primary}
+						style:--ring-accent={accent}
+						style:--ring-secondary={secondary}
 						aria-hidden="true"
 					></div>
 					<img
@@ -64,8 +61,10 @@
 			<div class="spin-wrap relative p-[3px]" style:border-radius={radius}>
 				<div
 					class="spin-ring absolute inset-0"
-					style:background={spinGradient}
 					style:border-radius={radius}
+					style:--ring-primary={primary}
+					style:--ring-accent={accent}
+					style:--ring-secondary={secondary}
 					aria-hidden="true"
 				></div>
 				<div
@@ -88,14 +87,34 @@
 {/if}
 
 <style>
+	/* Registered so the browser can smoothly interpolate the angle between keyframes
+	   instead of jumping straight from 0deg to 360deg. */
+	@property --spin-angle {
+		syntax: '<angle>';
+		inherits: false;
+		initial-value: 0deg;
+	}
+
 	.spin-wrap {
 		display: inline-flex;
+		overflow: hidden;
 	}
 
 	.spin-ring {
 		z-index: 0;
+		/* Animate the gradient's own angle rather than rotating this box with a
+		   transform. Rotating the box worked fine for a circle, but for square/rounded
+		   shapes the box's straight corners swung past the frame edges each turn,
+		   producing a visible "poking corner" glitch. Keeping the box static and
+		   spinning only the color stops looks clean for every shape. */
+		background: conic-gradient(
+			from var(--spin-angle),
+			var(--ring-primary),
+			var(--ring-accent),
+			var(--ring-secondary),
+			var(--ring-primary)
+		);
 		animation: spin-ring 6s linear infinite;
-		will-change: transform;
 	}
 
 	.spin-wrap :global(img) {
@@ -108,7 +127,7 @@
 
 	@keyframes spin-ring {
 		to {
-			transform: rotate(360deg);
+			--spin-angle: 360deg;
 		}
 	}
 
