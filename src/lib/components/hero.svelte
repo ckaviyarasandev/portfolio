@@ -29,7 +29,9 @@
 	let wheelLocked = false;
 	let boundaryArmed = false;
 	let boundaryDirection = 0;
+	let wheelIdleTimer;
 	const WHEEL_THRESHOLD = 12;
+	const WHEEL_IDLE_MS = 150;
 
 	$effect(() => {
 		onBackgroundChange?.(currentGradient);
@@ -53,6 +55,7 @@
 		currentGradient = generateGradient(currentPalette);
 		boundaryArmed = false;
 		boundaryDirection = 0;
+		clearTimeout(wheelIdleTimer);
 		resetTimer();
 		unlockAfterTransition();
 	}
@@ -114,24 +117,36 @@
 		const dir = e.deltaY > 0 ? 1 : -1;
 		const activeEl = getActiveScrollEl();
 
+		clearTimeout(wheelIdleTimer);
+
 		if (activeEl) {
 			const atTop = activeEl.scrollTop <= 0;
 			const atBottom = activeEl.scrollTop + activeEl.clientHeight >= activeEl.scrollHeight - 1;
 			const atEdge = (dir === 1 && atBottom) || (dir === -1 && atTop);
 
 			if (!atEdge) {
-				// still room to scroll in this direction — let it scroll and reset the arm
+				// still room to scroll in this direction — let it scroll, forget any armed state
 				boundaryArmed = false;
 				boundaryDirection = 0;
 				return;
 			}
 
-			if (!boundaryArmed || boundaryDirection !== dir) {
-				// first wheel tick that lands on the edge — consume it, don't navigate yet
-				boundaryArmed = true;
+			if (boundaryDirection !== dir) {
+				// edge direction changed — needs its own pause before it can navigate
+				boundaryArmed = false;
 				boundaryDirection = dir;
+			}
+
+			if (!boundaryArmed) {
+				// still inside the same continuous scroll/inertia that reached the edge.
+				// Only arm once the wheel actually stops firing for a bit — a fresh wheel
+				// event after that pause is what's allowed to navigate.
+				wheelIdleTimer = setTimeout(() => {
+					boundaryArmed = true;
+				}, WHEEL_IDLE_MS);
 				return;
 			}
+			// boundaryArmed: the previous scroll paused at the edge and this is a new attempt
 		}
 
 		if (wheelLocked || isAnimating) return;
