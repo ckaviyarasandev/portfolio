@@ -21,7 +21,7 @@ export const allDetails = [
 			"I'm a Web Developer with 2+ years of experience building scalable, user-friendly web applications using Svelte, JavaScript, Node.js, GraphQL, and MongoDB. I enjoy creating clean, reusable, and maintainable solutions by following modern development practices and component-driven architecture. "
 		],
 		image: {
-			src: '/images/profile_transparent.png',
+			src: ['/images/profile_transparent.png', '/images/kaviyarasan_hi.png'],
 			alt: 'Portrait of Kaviyarasan',
 			position: 'right', // 'left' | 'right'
 			shape: 'circle', // 'circle' | 'rounded' | 'square'
@@ -34,7 +34,6 @@ export const allDetails = [
 			{ title: 'Based in', value: 'Salem, Tamil Nadu, India' }
 		],
 		buttons: [
-			{ label: 'View Projects', type: 'scroll', target: 'projects', variant: 'primary' },
 			{
 				label: 'Download Resume',
 				type: 'download',
@@ -362,32 +361,42 @@ export const allDetails = [
 	// ─────────────────────────────────────────────
 	// 9. CONNECT
 	// ─────────────────────────────────────────────
-  {
-    id: "connect",
-    layout: "connect",
-    title: "Let's Connect",
-    subtitle: "Open to new opportunities and collaborations",
-    description:
-      "I'm open to full-time roles, freelance work, and collaborations involving Svelte, Node.js, or Power Platform automation. Reach out — I usually reply within a day or two.",
-    contactMethods: [
-      { title: "Email", value: "cmkkaviyarasanmm@gmail.com", icon: "mail" },
-      { title: "Phone", value: "+91 8124212240" },
-      { title: "Location", value: "Salem, Tamil Nadu, India", icon: "location" }
-    ],
-    highlights: [
-      { title: "Status", value: "Open to opportunities" },
-      { title: "Response Time", value: "Within 1–2 days" },
-      { title: "Interested In", value: "Full-time · Freelance · Collaboration" }
-    ],
-    links: [
-      { label: "GitHub", icon: "github", href: "https://github.com/YOUR-USERNAME" }, // TODO: replace with actual profile URL
-      { label: "LinkedIn", icon: "linkedin", href: "https://linkedin.com/in/YOUR-PROFILE" } // TODO: replace with actual profile URL
-    ],
-    buttons: [
-      { label: "Send an Email", type: "external", href: "mailto:cmkkaviyarasanmm@gmail.com", variant: "primary" },
-      { label: "Download Resume", type: "download", href: "/resume-kaviyarasan.pdf", variant: "secondary" }
-    ]
-  }
+	{
+		id: 'connect',
+		layout: 'connect',
+		title: "Let's Connect",
+		subtitle: 'Open to new opportunities and collaborations',
+		description:
+			"I'm open to full-time roles, freelance work, and collaborations involving Svelte, Node.js, or Power Platform automation. Reach out — I usually reply within a day or two.",
+		contactMethods: [
+			{ title: 'Email', value: 'cmkkaviyarasanmm@gmail.com', icon: 'mail' },
+			{ title: 'Phone', value: '+91 8124212240' },
+			{ title: 'Location', value: 'Salem, Tamil Nadu, India', icon: 'location' }
+		],
+		highlights: [
+			{ title: 'Status', value: 'Open to opportunities' },
+			{ title: 'Response Time', value: 'Within 1–2 days' },
+			{ title: 'Interested In', value: 'Full-time · Freelance · Collaboration' }
+		],
+		links: [
+			{ label: 'GitHub', icon: 'github', href: 'https://github.com/YOUR-USERNAME' }, // TODO: replace with actual profile URL
+			{ label: 'LinkedIn', icon: 'linkedin', href: 'https://linkedin.com/in/YOUR-PROFILE' } // TODO: replace with actual profile URL
+		],
+		buttons: [
+			{
+				label: 'Send an Email',
+				type: 'external',
+				href: 'mailto:cmkkaviyarasanmm@gmail.com',
+				variant: 'primary'
+			},
+			{
+				label: 'Download Resume',
+				type: 'download',
+				href: '/resume-kaviyarasan.pdf',
+				variant: 'secondary'
+			}
+		]
+	}
 ];
 
 export default allDetails;
@@ -447,7 +456,4 @@ export const temp_allDetails = [
 
 export const navbarLinks = {
 	home: { name: 'Home', page: 'home' },
-	experience: { name: 'Experience', page: 'experience' },
-	skills: { name: 'Skills', page: 'skills' },
-	contact: { name: 'Contact', page: 'contact' }
 };
