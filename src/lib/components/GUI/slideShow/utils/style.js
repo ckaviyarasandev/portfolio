@@ -1,7 +1,3 @@
-// Central style tokens. Every block/layout pulls its variant classes from
-// here so visual language stays consistent and new variants only need to be
-// added in one place.
-
 export const MOTION = 'motion-safe:transition-all motion-safe:duration-300';
 
 export const IMAGE_SHAPES = {
@@ -12,9 +8,9 @@ export const IMAGE_SHAPES = {
 
 export const IMAGE_FRAMES = {
 	plain: 'border-0 bg-transparent',
-	bordered: 'border border-white/25 bg-white/10 backdrop-blur-xl shadow-xl shadow-black/30',
+	bordered: 'border-l border-t-0 border-r-2 border-b-4 border-white/25 bg-white/10 backdrop-blur-xl shadow-xl shadow-black/30',
 	elevated:
-		'border border-white/15 bg-white/[0.07] backdrop-blur-xl shadow-2xl shadow-black/40',
+		'border-l border-t-0 border-r-2 border-b-4  border-white/15 bg-white/[0.07] backdrop-blur-xl shadow-2xl shadow-black/40',
 	background: 'border-0 bg-transparent'
 };
 

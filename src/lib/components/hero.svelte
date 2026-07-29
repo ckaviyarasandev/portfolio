@@ -101,8 +101,6 @@
 	function handleWheel(e) {
 		if (Math.abs(e.deltaY) < WHEEL_THRESHOLD) return;
 
-		// If the active slide's own content is scrollable, let it scroll until
-		// it hits the edge in the scroll direction before changing slides.
 		const activeEl = containerEl?.querySelector('.glass-scroll[aria-hidden="false"]');
 		if (activeEl) {
 			const atTop = activeEl.scrollTop <= 0;
@@ -165,13 +163,14 @@
 				{#key `${i}-${transitionId}`}
 					<SlideShow
 						{section}
+						palette={currentPalette}
 						status={i === previousIndex ? 'out' : previousIndex !== null ? 'in' : 'resting'}
 						{direction}
 						active={i === currentIndex}
 					/>
 				{/key}
 			{:else}
-				<SlideShow {section} status="parked" active={false} />
+				<SlideShow {section} palette={currentPalette} status="parked" active={false} />
 			{/if}
 		{/each}
 	</div>

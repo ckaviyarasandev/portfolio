@@ -2,7 +2,7 @@
 	import ScrollbarStyles from '../../../themes/scrollbarStyles.svelte';
 	import { LAYOUTS, DEFAULT_LAYOUT } from './slideShow/layouts/index.js';
 
-	let { section, status = 'resting', direction = 1, active = true } = $props();
+	let { section, palette, status = 'resting', direction = 1, active = true } = $props();
 
 	const Layout = $derived(LAYOUTS[section.layout] ?? LAYOUTS[DEFAULT_LAYOUT]);
 
@@ -38,7 +38,7 @@
 			<Layout {section} />
 		</div>
 	</div>
-</div>
+</div>            
 
 <style>
 	.slide-parked {
@@ -51,17 +51,6 @@
 		visibility: visible;
 	}
 
-	/*
-	 * Four-phase timeline (total = 100ms + 300ms + 500ms + 900ms = 800ms, set
-	 * via TRANSITION_MS in slideNav.svelte and piped in through --slide-duration):
-	 *   phase 1 — first 10% of the distance, played over the first  100ms (5.56%)
-	 *   phase 2 — next  15% of the distance, played over the next   300ms (22.22%)
-	 *   phase 3 — next  70% of the distance, played over the next   500ms (50%)
-	 *   phase 4 — final  5% of the distance, played over the final  900ms (100%)
-	 * A short, gentle wind-up, a quick pickup, the fast middle rush covering
-	 * most of the ground, then a long slow settle over the last sliver of
-	 * distance instead of an abrupt stop.
-	 */
 	.slide-in-right {
 		visibility: visible;
 		animation: slideInFromRight var(--slide-duration, 800ms) linear forwards;
