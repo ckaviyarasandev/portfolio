@@ -6,7 +6,7 @@
 	import ContentBlocks from '../blocks/ContentBlocks.svelte';
 	import { cx } from '../utils/style.js';
 
-	let { section } = $props();
+	let { section, palette } = $props();
 
 	const imageOnLeft = $derived(section.image?.position === 'left');
 </script>
@@ -22,5 +22,5 @@
 		<ContentBlocks {section} class="mt-4" />
 	</div>
 
-	<SlideMedia image={section.image} class={imageOnLeft ? 'md:order-1' : ''} />
+	<SlideMedia image={section.image} {palette} class={imageOnLeft ? 'md:order-1' : ''} />
 </section>

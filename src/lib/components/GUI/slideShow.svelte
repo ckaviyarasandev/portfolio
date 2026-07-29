@@ -35,7 +35,7 @@
 		<div
 			class="slide-root w-full box-border shrink-0 overflow-x-hidden overflow-y-auto [-webkit-overflow-scrolling:touch]"
 		>
-			<Layout {section} />
+			<Layout {section} {palette} />
 		</div>
 	</div>
 </div>            

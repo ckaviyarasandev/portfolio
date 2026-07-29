@@ -5,13 +5,13 @@
 	import ActionGroup from '../blocks/ActionGroup.svelte';
 	import ContentBlocks from '../blocks/ContentBlocks.svelte';
 
-	let { section } = $props();
+	let { section, palette } = $props();
 </script>
 
 <section
 	class="relative flex w-full p-4 flex-col items-center gap-8 overflow-hidden text-center"
 >
-	<SlideMedia image={section.image} />
+	<SlideMedia image={section.image} {palette} />
 	<SlideHeading
 		tag={section.tag}
 		title={section.title}
