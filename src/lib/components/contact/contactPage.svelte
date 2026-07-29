@@ -28,7 +28,7 @@
 	<section class="grid gap-4 sm:grid-cols-2" aria-label="Contact details">
 		{#each contactLinks as contact}
 			<a
-				class="group rounded-2xl border border-white/15 bg-black/25 p-6 transition hover:-translate-y-1 hover:border-white/40 hover:bg-black/35"
+				class="group rounded-2xl border border-white/15 bg-white/5 p-6 transition hover:-translate-y-1 hover:border-white/40 hover:bg-white/10"
 				href={contact.href}
 				target={contact.href.startsWith('http') ? '_blank' : undefined}
 				rel={contact.href.startsWith('http') ? 'noreferrer' : undefined}

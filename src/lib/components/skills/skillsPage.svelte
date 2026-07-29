@@ -22,7 +22,7 @@
 
 	<section class="grid gap-5 lg:grid-cols-3" aria-label="Skill groups">
 		{#each skillGroups as group}
-			<article class="rounded-2xl border border-white/15 bg-black/25 p-6 backdrop-blur-sm">
+			<article class="rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-sm">
 				<div class="mb-7 flex items-center justify-between gap-4">
 					<h2 class="text-xl font-semibold">{group.title}</h2>
 					<span class={`h-2.5 w-2.5 rounded-full ${accentClasses[group.accent]}`} aria-hidden="true"

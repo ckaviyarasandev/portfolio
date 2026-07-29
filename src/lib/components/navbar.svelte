@@ -82,7 +82,7 @@
 	{#if menuOpen}
 		<ul
 			id="mobile-menu"
-			class="mx-auto mt-2 flex max-w-5xl flex-col gap-1 rounded-2xl border p-2 backdrop-blur-md sm:hidden border-white/10 bg-zinc-900/95"
+			class="mx-auto mt-2 flex max-w-5xl flex-col gap-1 rounded-2xl border p-2 backdrop-blur-md sm:hidden border-white/10 bg-white/5"
 		>
 			{#each Object.values(navbarLinks) as link}
 				<li>

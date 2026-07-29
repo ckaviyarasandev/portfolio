@@ -9,7 +9,7 @@
 		role="presentation"
 	>
 		<div
-			class="relative w-full max-w-md rounded-2xl border border-white/10 bg-zinc-900/90 p-6 shadow-2xl backdrop-blur-xl"
+			class="relative w-full max-w-md rounded-2xl border border-white/10 bg-white/10 p-6 shadow-2xl backdrop-blur-xl"
 			onclick={(e) => e.stopPropagation()}
 			role="dialog"
 			aria-modal="true"
