@@ -4,6 +4,7 @@
 	import { onMount } from 'svelte';
 	import { pageTitles } from '../datas/content';
 	import { aboutMe } from '../datas/info';
+	import CursorTrail from '$lib/components/CursorTrail.svelte';
 
 	const infoTitle = `${aboutMe.name} | ${aboutMe.designation}`;
 	const titles = [infoTitle, ...pageTitles];
@@ -32,5 +33,7 @@
 	<link rel="icon" href={favicon} />
 	<title>{currentTitle}</title>
 </svelte:head>
+
+<CursorTrail />
 
 {@render children()}

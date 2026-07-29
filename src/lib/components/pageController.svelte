@@ -7,6 +7,7 @@
 	import { navbarLinks, allDetails } from '../../datas/content';
 	import { heroPageColors, notFoundPalette } from '../../themes/styles.js';
 	import { generateGradient } from '../../utils/gradientGenerator';
+	import { setActivePalette } from '../state/activePalette.svelte.js';
 	import { SLIDE_STATUS, TRANSITION_MS as DEFAULT_TRANSITION_MS } from './GUI/slideNav.svelte';
 	import ExperiencePage from './experience/experiencePage.svelte';
 	import SkillsPage from './skills/skillsPage.svelte';
@@ -61,6 +62,7 @@
 	$effect(() => {
 		if (isKnownPage && !isHome && !experiencePage) {
 			currentGradient = generateGradient(pagePalettes[page]);
+			setActivePalette(pagePalettes[page]);
 		}
 	});
 
@@ -118,6 +120,7 @@
 			style="--bg-duration: {bgDurationMs}ms;"
 			aria-hidden="true"
 		>
+			<span class="glitter-cursor" aria-hidden="true"></span>
 			<span class="glitter-burst" aria-hidden="true"></span>
 		</div>
 	{/key}
@@ -262,12 +265,51 @@
 		}
 	}
 
+	/* A ring that pops out from the center like a cursor click, right as the glitter
+	   sparkles land — ties the sparkle scatter to a single focal point. */
+	.glitter-cursor {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 64px;
+		height: 64px;
+		margin: -32px 0 0 -32px;
+		border-radius: 9999px;
+		border: 2px solid rgba(255, 255, 255, 0.85);
+		box-shadow:
+			0 0 12px rgba(255, 255, 255, 0.6),
+			0 0 26px rgba(255, 106, 213, 0.45),
+			0 0 40px rgba(106, 247, 255, 0.3);
+		opacity: 0;
+		pointer-events: none;
+		animation: glitterCursorPulse calc(var(--bg-duration, 800ms) * 0.65) ease-out;
+	}
+
+	@keyframes glitterCursorPulse {
+		0% {
+			opacity: 0;
+			transform: scale(0.15);
+			border-width: 3px;
+		}
+		30% {
+			opacity: 1;
+			transform: scale(1);
+			border-width: 2px;
+		}
+		100% {
+			opacity: 0;
+			transform: scale(2.4);
+			border-width: 1px;
+		}
+	}
+
 	@media (prefers-reduced-motion: reduce) {
 		.bg-slide-enter {
 			animation: none;
 			transform: none;
 		}
-		.glitter-burst {
+		.glitter-burst,
+		.glitter-cursor {
 			animation: none;
 			opacity: 0;
 		}

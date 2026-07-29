@@ -27,8 +27,8 @@
 			subtitle={section.subtitle}
 			quote={section.quote}
 		/>
-		<SlideDescription description={section.description} />
 		<ContentBlocks {section} class="mt-4" />
+		<SlideDescription description={section.description} />
 		<ActionGroup buttons={section.buttons} links={section.links} />
 	</div>
 

@@ -4,6 +4,7 @@
 	import SlideNav, { INTERVAL, TRANSITION_MS, SLIDE_STATUS } from './GUI/slideNav.svelte';
 	import { heroPageColors } from '../../themes/styles.js';
 	import { generateGradient, getNextPalette } from '../../utils/gradientGenerator';
+	import { setActivePalette } from '../state/activePalette.svelte.js';
 
 	let { sections = [], onBackgroundChange, onSlideStateChange } = $props();
 
@@ -43,6 +44,11 @@
 
 	$effect(() => {
 		onBackgroundChange?.(currentGradient);
+	});
+
+	$effect(() => {
+		// Keep the shared cursor-trail palette in sync with whichever slide is active.
+		setActivePalette(currentPalette);
 	});
 
 	$effect(() => {
