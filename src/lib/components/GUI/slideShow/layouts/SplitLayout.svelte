@@ -20,7 +20,7 @@
 	they're what actually guarantee no horizontal overflow, independent of stacked vs row.
 -->
 <section
-	class="relative flex w-full flex-col items-center justify-center gap-6 overflow-hidden p-4 text-center sm:gap-8 md:flex-row md:justify-between md:text-left"
+	class="relative flex w-full flex-col items-center justify-center gap-6 overflow-hidden text-center px-4 md:px-6 lg:px-10  sm:gap-8 md:flex-row md:justify-between md:text-left"
 >
 	<SlideMedia
 		image={section.image}
@@ -31,7 +31,7 @@
 	<div
 		id="contentSection"
 		class={cx(
-			'glass-scroll flex min-w-0 w-full flex-1 flex-col items-center gap-2 self-center overflow-visible md:max-h-[80dvh] md:items-start md:overflow-y-auto',
+			'glass-scroll flex min-w-0 w-full flex-1 flex-col items-center gap-2 self-center overflow-visible md:max-h-dvh md:items-start md:overflow-y-auto',
 			imageOnLeft && 'md:order-2',
 			!imageOnLeft && 'md:order-1'
 		)}

@@ -24,16 +24,16 @@
 <ScrollbarStyles />
 
 <div
-	class="glass-scroll absolute inset-0 overflow-y-auto md:overscroll-contain {animationClass} p-2 py-4 md:py-2"
+	class="glass-scroll absolute inset-0 {animationClass}"
 	style="
 		pointer-events: {active ? 'auto' : 'none'};
 		z-index: {active ? 2 : status === 'parked' ? 0 : 1};
 	"
 	aria-hidden={!active}
 >
-	<div class="t-12 p-6 mx-auto flex min-h-full w-full items-center justify-center">
+	<div class="flex min-h-full w-full items-center justify-center">
 		<div
-			class="slide-root w-full box-border shrink-0 overflow-x-hidden overflow-y-auto [-webkit-overflow-scrolling:touch]"
+			class="slide-root w-full box-border shrink-0"
 		>
 			<Layout {section} {palette} />
 		</div>

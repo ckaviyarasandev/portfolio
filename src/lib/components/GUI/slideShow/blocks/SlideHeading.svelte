@@ -8,7 +8,7 @@
 	const alignClass = align === 'center' ? 'items-center text-center' : 'items-center md:items-start';
 </script>
 
-<div class="flex w-full min-w-0 flex-col {alignClass}">
+<div class="flex w-full min-w-0 flex-col mt-10 {alignClass}">
 	{#if tag}
 		<p
 			class="text-shadow-sm mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-[0.3em] text-white/80"
