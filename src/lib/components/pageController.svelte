@@ -10,14 +10,20 @@
 	import { setActivePalette } from '../state/activePalette.svelte.js';
 	import { SLIDE_STATUS, TRANSITION_MS as DEFAULT_TRANSITION_MS } from './GUI/slideNav.svelte';
 	import ResumePage from './resume/resumePage.svelte';
+	import ConnectPage from './connect/connectPage.svelte';
+	import CertificatesPage from './certificates/certificatesPage.svelte';
 
 	const notFoundGradient = generateGradient(notFoundPalette);
-	const pagePalettes = Object.fromEntries(
-		Object.values(navbarLinks).map((link, index) => [
-			link.page,
-			heroPageColors[index % heroPageColors.length]
-		])
-	);
+
+	// Non-home pages used to get a fixed palette keyed off their position in
+	// navbarLinks (home → Ocean Blue, resume → Royal Purple, connect → Emerald),
+	// which is why every non-home page always rendered the same color family.
+	// Picking randomly here instead makes every page load/navigation as varied
+	// as Hero's own slide-to-slide palette cycling.
+	function pickRandomPalette() {
+		return heroPageColors[Math.floor(Math.random() * heroPageColors.length)];
+	}
+	const homeInitialPalette = pickRandomPalette();
 
 	let { page } = $props();
 
@@ -25,13 +31,15 @@
 	// prop below) instead of letting Hero call generateGradient() again independently —
 	// that would produce a different random string for the same palette and read as a
 	// real background change, firing an unwanted slide right after the page loads.
-	const initialGradient = generateGradient(pagePalettes[navbarLinks.home.page]);
+	const initialGradient = generateGradient(homeInitialPalette);
 	let currentGradient = $state(initialGradient);
 
 	let isKnownPage = $derived(Object.values(navbarLinks).some((link) => link.page === page));
 	let isNotFound = $derived(!isKnownPage);
 	let isHome = $derived(!isNotFound && page === navbarLinks.home.page);
 	let resumePage = $derived(page === navbarLinks.resume.page);
+	let connectPage = $derived(page === navbarLinks.connect.page);
+	let certificatesPage = $derived(page === navbarLinks.certificates.page);
 
 	let activeBackground = $derived(isKnownPage ? currentGradient : notFoundGradient);
 
@@ -65,8 +73,13 @@
 
 	$effect(() => {
 		if (isKnownPage && !isHome) {
-			currentGradient = generateGradient(pagePalettes[page]);
-			setActivePalette(pagePalettes[page]);
+			// Re-read `page` directly so this effect fires on every navigation
+			// between non-home pages too (isHome/isKnownPage alone don't change
+			// when going e.g. resume → connect, so a new palette wouldn't get picked).
+			void page;
+			const palette = pickRandomPalette();
+			currentGradient = generateGradient(palette);
+			setActivePalette(palette);
 		}
 	});
 
@@ -155,6 +168,10 @@
 		/>
 	{:else if resumePage}
 		<ResumePage onNavigate={handleNavigate} />
+	{:else if connectPage}
+		<ConnectPage onNavigate={handleNavigate} />
+	{:else if certificatesPage}
+		<CertificatesPage onNavigate={handleNavigate} />
 	{:else if isNotFound}
 		<NotFound />
 	{/if}

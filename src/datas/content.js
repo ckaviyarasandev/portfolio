@@ -23,8 +23,7 @@ export const allDetails = [
 		title: 'Kaviyarasan C',
 		subtitle: 'Web Developer — Svelte · Node.js · GraphQL',
 		description: [
-			'Web Developer with 2+ years building production web apps end to end — Svelte and Tailwind CSS on the front, Node.js, GraphQL and MongoDB behind them. I design GraphQL schemas, evolve MongoDB data models with the migrations to match, and build reusable, data-driven components instead of one-off screens: less duplicated markup, faster features, and fewer hardcoded conditionals for the next person.',
-			'Currently shipping an EdTech learning platform used across multiple course tracks — Vedic Maths and Junior Abacus modules, video playback, ratings and leaderboards. Also fluent in the Microsoft Power Platform — Power Apps, Power Automate and Copilot Studio — from automating real business workflows at Genpact.'
+			'Web Developer with 2+ years building production web apps end to end — Svelte and Tailwind CSS on the front, Node.js, GraphQL and MongoDB behind them. I design GraphQL schemas, evolve MongoDB data models with the migrations to match, and build reusable, data-driven components instead of one-off screens: less duplicated markup, faster features, and fewer hardcoded conditionals for the next person.'
 		],
 		image: {
 			src: ['/images/profile_transparent.png', '/images/kaviyarasan_hi.png'],
@@ -36,7 +35,9 @@ export const allDetails = [
 		highlights: [
 			{ title: 'Experience', value: '2+ years' },
 			{ title: 'Core Stack', value: 'Svelte · Node.js · GraphQL' },
-			{ title: 'Projects Shipped', value: '5+' },
+			{ title: 'Worked in', value: 'EdTech — Learning Platforms' },
+			{ title: 'Also Skilled In', value: 'Power Platform · Azure' },
+			{ title: 'Status', value: 'Open to opportunities' },
 			{ title: 'Based in', value: 'Salem, Tamil Nadu, India' }
 		],
 		buttons: [
@@ -46,7 +47,7 @@ export const allDetails = [
 				href: resumeFile.href,
 				variant: 'secondary'
 			},
-			{ label: 'Get in Touch', type: 'scroll', target: 'connect', variant: 'secondary' }
+			{ label: 'Get in Touch', type: 'link', href: '/connect', variant: 'secondary' }
 		]
 	},
 
@@ -385,8 +386,8 @@ export const allDetails = [
 			{ title: 'Interested In', value: 'Full-time · Freelance · Collaboration' }
 		],
 		links: [
-			{ label: 'GitHub', icon: 'github', href: 'https://github.com/YOUR-USERNAME' }, // TODO: replace with actual profile URL
-			{ label: 'LinkedIn', icon: 'linkedin', href: 'https://linkedin.com/in/YOUR-PROFILE' } // TODO: replace with actual profile URL
+			{ label: 'GitHub', icon: 'github', href: 'https://github.com/ckaviyarasandev' },
+			{ label: 'LinkedIn', icon: 'linkedin', href: 'https://linkedin.com/in/kaviyarasanc' }
 		],
 		buttons: [
 			{
@@ -463,4 +464,6 @@ export const temp_allDetails = [
 export const navbarLinks = {
 	home: { name: 'Home', page: 'home' },
 	resume: { name: 'Resume', page: 'resume' },
+	certificates: { name: 'Certificates', page: 'certificates' },
+	connect: { name: 'Get in Touch', page: 'connect' }
 };
