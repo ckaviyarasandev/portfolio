@@ -66,7 +66,6 @@ export const resumeSkills = [
 		label: 'Frontend',
 		tags: [
 			{ label: 'Svelte', hi: true },
-			{ label: 'SvelteKit' },
 			{ label: 'Component Architecture' },
 			{ label: 'SPA' }
 		]

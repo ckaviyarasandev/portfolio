@@ -16,9 +16,9 @@
 	}
 </script>
 
-<header class="fixed top-0 right-0 z-40 mr-4 max-w-[calc(100vw-2rem)] sm:mr-8 md:mr-12">
+<header class="fixed top-0 inset-x-0 z-40 px-4 sm:inset-x-auto sm:right-0 sm:mr-8 sm:max-w-[calc(100vw-2rem)] sm:px-0 md:mr-12">
 	<nav
-		class="flex max-w-full items-center justify-between gap-3 rounded-b-4xl border border-t-0 px-4 py-2 shadow backdrop-blur-md transition-colors duration-500 motion-reduce:transition-none border-white/10 bg-white/5 sm:gap-6 sm:px-10"
+		class="flex max-w-full items-center justify-between gap-3 rounded-b-none md:rounded-b-4xl border border-t-0 px-4 py-2 shadow backdrop-blur-md transition-colors duration-500 motion-reduce:transition-none border-white/10 bg-white/5 sm:gap-6 sm:px-10"
 	>
 		<button
 			type="button"

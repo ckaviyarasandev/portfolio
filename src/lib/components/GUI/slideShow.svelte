@@ -24,7 +24,7 @@
 <ScrollbarStyles />
 
 <div
-	class="glass-scroll absolute inset-0 {animationClass}"
+	class="glass-scroll absolute inset-0 overflow-y-auto overscroll-contain {animationClass}"
 	style="
 		pointer-events: {active ? 'auto' : 'none'};
 		z-index: {active ? 2 : status === 'parked' ? 0 : 1};

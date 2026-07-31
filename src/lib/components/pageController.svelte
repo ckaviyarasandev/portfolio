@@ -1,7 +1,7 @@
 <script>
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import Navbar from './Navbar.svelte';
+	import Navbar from './navbar.svelte';
 	import Hero from './hero.svelte';
 	import NotFound from './NotFound.svelte';
 	import { navbarLinks, allDetails } from '../../datas/content';
