@@ -6,16 +6,18 @@
 
 {#if description}
 	{#if isArray}
-		{#each description as item}
+		{#each description as item, i}
 			<p
-				class="text-shadow-sm mt-2 w-full min-w-0 break-words text-pretty rounded-2xl bg-gray-800/10 px-4 py-2 text-base leading-8 text-white backdrop-blur-xl {alignClass}"
+				class="stagger-item text-shadow-sm mt-2 w-full min-w-0 break-words text-pretty rounded-2xl bg-gray-800/10 px-4 py-2 text-base leading-8 text-white backdrop-blur-xl {alignClass}"
+				style:--stagger-delay="{340 + i * 60}ms"
 			>
 				{item}
 			</p>
 		{/each}
 	{:else}
 		<p
-			class="text-shadow-sm mt-2 text-pretty rounded-2xl bg-gray-800/10 px-4 py-2 pb-12 text-base leading-8 text-white backdrop-blur-xl {alignClass}"
+			class="stagger-item text-shadow-sm mt-2 text-pretty rounded-2xl bg-gray-800/10 px-4 py-2 pb-12 text-base leading-8 text-white backdrop-blur-xl {alignClass}"
+			style:--stagger-delay="340ms"
 		>
 			{description}
 		</p>

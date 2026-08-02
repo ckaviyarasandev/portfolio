@@ -41,6 +41,17 @@
 </div>            
 
 <style>
+	/* The entrance animations (.stagger-item / .stagger-item-x) offset children with
+	   `transform` before they settle to their resting position. Transformed geometry
+	   counts toward the scrollable overflow of the nearest scrolling ancestor, so
+	   without this, `.glass-scroll` (overflow-y: auto below) briefly thinks it has
+	   more content than it does and shows a scrollbar/extra scroll range that then
+	   disappears once the animation settles. Clipping here keeps that transient
+	   offset local instead of leaking into the ancestor's scroll calculation. */
+	.slide-root {
+		overflow: clip;
+	}
+
 	.slide-parked {
 		transform: translateX(100%);
 		visibility: hidden;
@@ -152,6 +163,78 @@
 		.slide-out-right {
 			animation: none !important;
 			transform: translateX(0%);
+		}
+	}
+
+	:global(.stagger-item) {
+		opacity: 0;
+		transform: translateY(14px);
+	}
+	:global(.slide-in-right .stagger-item),
+	:global(.slide-in-left .stagger-item),
+	:global(.slide-resting .stagger-item) {
+		animation: heroContentReveal 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
+		animation-delay: var(--stagger-delay, 0ms);
+	}
+	:global(.slide-out-left .stagger-item),
+	:global(.slide-out-right .stagger-item),
+	:global(.slide-parked .stagger-item) {
+		opacity: 1;
+		transform: none;
+		animation: none;
+	}
+	@keyframes heroContentReveal {
+		from {
+			opacity: 0;
+			transform: translateY(14px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		:global(.stagger-item) {
+			opacity: 1;
+			transform: none;
+			animation: none;
+		}
+	}
+
+	:global(.stagger-item-x) {
+		opacity: 0;
+		transform: translateX(var(--stagger-x, -28px));
+	}
+	:global(.slide-in-right .stagger-item-x),
+	:global(.slide-in-left .stagger-item-x),
+	:global(.slide-resting .stagger-item-x) {
+		animation: heroContentRevealX var(--stagger-duration, 550ms) cubic-bezier(0.16, 1, 0.3, 1)
+			both;
+		animation-delay: var(--stagger-delay, 0ms);
+	}
+	:global(.slide-out-left .stagger-item-x),
+	:global(.slide-out-right .stagger-item-x),
+	:global(.slide-parked .stagger-item-x) {
+		opacity: 1;
+		transform: none;
+		animation: none;
+	}
+	@keyframes heroContentRevealX {
+		from {
+			opacity: 0;
+			transform: translateX(var(--stagger-x, -28px));
+		}
+		to {
+			opacity: 1;
+			transform: translateX(0);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		:global(.stagger-item-x) {
+			opacity: 1;
+			transform: none;
+			animation: none;
 		}
 	}
 

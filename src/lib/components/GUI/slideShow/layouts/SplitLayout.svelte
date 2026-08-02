@@ -42,19 +42,30 @@
 	<div
 		id="contentSection"
 		class={cx(
-			'glass-scroll flex min-w-0 w-full flex-1 flex-col items-center gap-2 self-center overflow-visible md:max-h-dvh md:items-start md:overflow-y-auto',
+			'glass-scroll min-w-0 w-full flex-1 self-center overflow-visible md:max-h-dvh md:overflow-y-auto',
 			imageOnLeft && 'md:order-2',
 			!imageOnLeft && 'md:order-1'
 		)}
 	>
-		<SlideHeading
-			tag={section.tag}
-			title={section.title}
-			subtitle={section.subtitle}
-			quote={section.quote}
-		/>
-		<ContentBlocks {section} class="mt-4" />
-		<SlideDescription description={section.description} />
-		<ActionGroup buttons={buttonsUnderMedia ? [] : section.buttons} links={section.links} />
+		<!--
+			Entrance animations offset SlideHeading/ContentBlocks/SlideDescription/ActionGroup
+			children with `transform` before they settle. Transformed geometry counts toward
+			the scrollable overflow of the nearest scrolling ancestor — #contentSection above
+			is `md:overflow-y-auto` — so without a clip boundary in between, it briefly shows
+			extra scroll room (both axes, since overflow-x auto-computes from overflow-y) that
+			disappears once the animation settles. This wrapper contains that transient offset
+			locally instead of letting it leak into #contentSection's scroll calculation.
+		-->
+		<div class="flex w-full flex-col items-center gap-2 overflow-clip md:items-start">
+			<SlideHeading
+				tag={section.tag}
+				title={section.title}
+				subtitle={section.subtitle}
+				quote={section.quote}
+			/>
+			<ContentBlocks {section} class="mt-4" />
+			<SlideDescription description={section.description} />
+			<ActionGroup buttons={buttonsUnderMedia ? [] : section.buttons} links={section.links} />
+		</div>
 	</div>
 </section>

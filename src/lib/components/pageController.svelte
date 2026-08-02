@@ -1,5 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
+	import { onMount, untrack } from 'svelte';
 	import { goto } from '$app/navigation';
 	import Navbar from './navbar.svelte';
 	import Hero from './hero.svelte';
@@ -59,7 +59,7 @@
 	// activeBackground — the real, correct color for whichever page loads first — so
 	// there's no placeholder-to-real color swap; it just sits still while the content
 	// (held back in hero.svelte's own lead pause) slides in on top of it.
-	let displayedBackground = $state(activeBackground);
+	let displayedBackground = $state(untrack(() => activeBackground));
 	let previousBackground = $state(null);
 	let bgTransitionId = $state(0);
 

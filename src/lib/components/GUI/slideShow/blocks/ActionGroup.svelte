@@ -26,7 +26,10 @@
 </script>
 
 {#if buttons?.length}
-	<div class="mt-10 flex flex-wrap items-center gap-4 {justifyClass}">
+	<div
+		class="stagger-item mt-10 flex flex-wrap items-center gap-4 {justifyClass}"
+		style:--stagger-delay="420ms"
+	>
 		{#each buttons as button, i}
 			<a
 				href={resolveHref(button)}
@@ -65,7 +68,10 @@
 {/if}
 
 {#if links?.length}
-	<div class="mt-8 flex gap-3 {justifyClass}">
+	<div
+		class="stagger-item mt-8 flex gap-3 {justifyClass}"
+		style:--stagger-delay="480ms"
+	>
 		{#each links as link, i}
 			<a
 				href={link.href}

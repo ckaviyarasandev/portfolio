@@ -5,13 +5,25 @@
 
 	// Compute once per item so colors stay stable across re-renders
 	const highlightBackgrounds = items.map(() => randemBackground() ?? 'none');
+
+	// Computed once per item too, so each chip keeps its own pace across re-renders —
+	// jittered delay (order stays roughly index-first) plus a randomized duration so
+	// some chips visibly glide in slower and some snap in quicker, instead of every
+	// chip landing on an identical, mechanical beat.
+	const highlightTimings = items.map((_, i) => ({
+		delay: Math.max(0, 320 + i * 160 + Math.round(Math.random() * 100 - 50)),
+		duration: 380 + Math.round(Math.random() * 360)
+	}));
 </script>
 
 {#if items?.length}
 	<ul class="mt-8 flex flex-wrap justify-center gap-3 md:justify-start">
 		{#each items as highlight, i}
 			<li
-				class="relative isolate max-w-full overflow-hidden break-words rounded-full border border-white/20 px-4 py-1.5 text-sm backdrop-blur-xl transition-all duration-300 motion-safe:hover:border-white/40 motion-safe:hover:shadow-lg motion-safe:hover:shadow-black/20"
+				class="stagger-item-x relative isolate max-w-full overflow-hidden break-words rounded-full border border-white/20 px-4 py-1.5 text-sm backdrop-blur-xl transition-all duration-300 motion-safe:hover:border-white/40 motion-safe:hover:shadow-lg motion-safe:hover:shadow-black/20"
+				style:--stagger-delay="{highlightTimings[i].delay}ms"
+				style:--stagger-duration="{highlightTimings[i].duration}ms"
+				style:--stagger-x={i % 2 === 0 ? '-28px' : '28px'}
 			>
 				<!-- dynamic gradient layer at 40% opacity -->
 				<span
