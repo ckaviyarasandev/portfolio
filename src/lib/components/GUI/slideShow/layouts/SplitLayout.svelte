@@ -42,20 +42,11 @@
 	<div
 		id="contentSection"
 		class={cx(
-			'glass-scroll min-w-0 w-full flex-1 self-center overflow-visible md:max-h-dvh md:overflow-y-auto',
+			'glass-scroll min-w-0 w-full flex-1 self-center overflow-visible md:max-h-dvh md:overflow-y-auto md:px-6 lg:px-10 py-10',
 			imageOnLeft && 'md:order-2',
 			!imageOnLeft && 'md:order-1'
 		)}
 	>
-		<!--
-			Entrance animations offset SlideHeading/ContentBlocks/SlideDescription/ActionGroup
-			children with `transform` before they settle. Transformed geometry counts toward
-			the scrollable overflow of the nearest scrolling ancestor — #contentSection above
-			is `md:overflow-y-auto` — so without a clip boundary in between, it briefly shows
-			extra scroll room (both axes, since overflow-x auto-computes from overflow-y) that
-			disappears once the animation settles. This wrapper contains that transient offset
-			locally instead of letting it leak into #contentSection's scroll calculation.
-		-->
 		<div class="flex w-full flex-col items-center gap-2 overflow-clip md:items-start">
 			<SlideHeading
 				tag={section.tag}

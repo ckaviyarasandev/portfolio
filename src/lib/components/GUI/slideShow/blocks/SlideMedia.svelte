@@ -69,9 +69,9 @@
      once both sit in a row on mobile; sizing/shrink behavior is the parent
      layout's job (see SplitLayout's `shrink-0`). -->
 {#if hasImageData}
-	<div class={cx('flex justify-center max-w-max', className)}>
+	<div class={cx('flex justify-center max-w-max mt-2 my-10 md:mb-6', className)}>
 		{#if isBackground}
-			<div class="relative">
+			<div class="relative mt-2 my-10 md:mb-6">
 				<div
 					class="absolute inset-0 scale-110 rounded-full blur-3xl"
 					style:background={`linear-gradient(to bottom right, ${glowColor}55, ${glowColor}10)`}
