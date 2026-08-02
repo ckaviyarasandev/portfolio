@@ -3,7 +3,7 @@
 	import { goto } from '$app/navigation';
 	import Navbar from './navbar.svelte';
 	import Hero from './hero.svelte';
-	import NotFound from './NotFound.svelte';
+	import NotFound from './notFound.svelte';
 	import { navbarLinks, allDetails } from '../../datas/content';
 	import { heroPageColors, notFoundPalette } from '../../themes/styles.js';
 	import { generateGradient } from '../../utils/gradientGenerator';
